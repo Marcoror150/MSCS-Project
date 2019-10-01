@@ -27,7 +27,7 @@ with open('Test_Python_Insert.csv', 'r') as f:
 	conn.commit()
 
 	# Skip the header row.
-	next(f)
+	f.readline()
 
 	cur.copy_from(f, 'Master', sep=',')
 	conn.commit()
