@@ -1,18 +1,18 @@
-Use Case
+**Use Case**
 	Insert Vehicle Information
-Actor
+**Actor**
 	System User
-Brief
+**Brief**
 	User can calculate the likelihood of getting into an accident with more than one fatality based on he/she submitting the make, model, and year of the vehicle they wish to research
-Stakeholders
+**Stakeholders**
 	User, Insurance Agents
-Pre-conditions
+**Pre-conditions**
 	User must have access to the predictive system
-Post-conditions
+**Post-conditions**
 	Predictive system must calculate the likelihood of getting into an accident with more than one fatality based on the vehicle information the user specified
-Triggers
+**Triggers**
 	User clicks ‘submit’ button after entering in all of the vehicle information
-Procedure
+**Procedure**
 	1. User accesses predictive system site
 	2. User selects “Likelihood of Getting into an Accident with Multiple Fatalities” model from drop-down menu
 	3. Program takes user to selected form
@@ -255,7 +255,6 @@ Procedure
 	1. Program takes user to the calculated form
 	2. Program displays statistical/graphical information of accident likelihood based on Geographical Location
 	3. User views the results
-
 
 
 
