@@ -13,6 +13,7 @@
 **Triggers**
 	User clicks ‘submit’ button after entering in all of the vehicle information
 **Procedure**
+
 	1. User accesses predictive system site
 	2. User selects “Likelihood of Getting into an Accident with Multiple Fatalities” model from drop-down menu
 	3. Program takes user to selected form
