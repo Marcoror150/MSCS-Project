@@ -1,0 +1,7 @@
+/*
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  - Put css in this file, and then use a format like the one above this in your html template
+*/
