@@ -28,17 +28,12 @@
 
             <!-- Make these Drop-downs/buttons left-jusitfied, the search bar right-justified... -->
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                <!-- Drop-down menu for categories -->
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
+                <!-- Home Button -->
+                <a href="{{ url_for('index') }}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fas fa-home"></i>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Multiple Fatalities</a>
-                        <a class="dropdown-item" href="#">Car Age</a>
-                        <a class="dropdown-item" href="#">Location</a>
-                    </div>
-                </div>
+                </a>
 
                 <!-- Button for Help Modal-->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -46,22 +41,14 @@
                 </button>
             </ul>
 
-
-            <!-- Search Form -->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-            </form>
         </nav>
 
         <div class="container">
                 <div class="jumbotron">
                     <h1 class="font-weight-bold">Accident Data based on Location</h1>
-                    <p>Data Analytics regarding car accidents (Add more intro)...</p>          
+                    <p>input and metrics</p>          
                 </div>
-                <p>Add Home Page Stuff Here/background info</p>      
-                <p>... Add directions.</p>
-                <p>Add multiple pages</p>
+                <p>Add content </p>
         </div>
 
         <!-- Help Modal Contents -->
@@ -77,7 +64,30 @@
         
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <p>hi</p>
+                            <p>
+                                You are currently reading the help screen for the home page of our application.
+                                Please read the following sections to help answer any questions you have.
+                            </p>
+    
+                            <p>
+                                <b>NHTSA:</b>
+                                    By clicking the NHTSA logo (National Highway Traffic Safety Administration), you will be redirected to our
+                                    GitHub repository page which holds our project.
+                            </p>
+    
+                            <p>
+                                <b>Categories:</b>
+                                    If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
+                                    The first option is for analyzing the likelihood of an accident having multiple fatalities given a certain
+                                    car (make and model). The second option allows you to analyze the the likelihood of a general car accident
+                                    based on the age of a car. The final option allows you to calculate the likelihood of an accident when given
+                                    a specific geographic location.
+                            </p>
+    
+                            <p>
+                                <b>Search Bar:</b>
+                                    The search bar allows you to search for...
+                            </p>
                     </div>
         
                     <!-- Modal footer -->
