@@ -24,9 +24,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
             <!-- Logo, with link to our GitHub Repository -->
-            <a class="navbar-brand" href="https://github.com/Marcoror150/MSCS-Project">NHTSA</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">C.A.R.S.</a>
 
-            <!-- Make these Drop-downs/buttons left-jusitfied, the search bar right-justified... -->
+            <!-- Make these Drop-downs/buttons left-jusitfied, the help button right-justified... -->
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                 <!-- Drop-down menu for categories -->
                 <div class="dropdown">
@@ -39,19 +39,12 @@
                         <a class="dropdown-item" href="{{ url_for('location') }}">Location</a>
                     </div>
                 </div>
-
-                <!-- Button for Help Modal-->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                    <i class="fas fa-question"></i>
-                </button>
             </ul>
 
-
-            <!-- Search Form -->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-            </form>
+            <!-- Button for Help Modal-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-question"></i>
+            </button>
         </nav>
 
         <div class="container">
