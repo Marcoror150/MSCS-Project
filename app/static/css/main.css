@@ -1,13 +1,19 @@
 
 /* Home and Help buttons */
-.btn-success{
+.btn-success {
   color: white;
   background-color: transparent;
   border-color: transparent;
 }
 
 /* Drop down menu*/
-.btn-secondary{
+.btn-secondary {
   background-color: transparent;
   border-color: transparent;
+}
+
+/* Index Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
 }
