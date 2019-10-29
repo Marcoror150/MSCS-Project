@@ -33,8 +33,8 @@
                         Categories
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ url_for('multiple_fatalities') }}">Multiple Fatalities</a>
-                        <a class="dropdown-item" href="{{ url_for('car_age') }}">Car Age</a>
+												<a class="dropdown-item" href="{{ url_for('car_age') }}">Car Age</a>
+												<a class="dropdown-item" href="{{ url_for('multiple_fatalities') }}">Make, Model, and Year</a>
                         <a class="dropdown-item" href="{{ url_for('location') }}">Location</a>
                     </div>
                 </div>
@@ -53,12 +53,12 @@
                 </div>
 				</div>
 				
-				<p>To access predictions on accident likelyhood, select one of the methods below:</p>
+				<p style="display:flex; justify-content:center;">To access predictions on accident likelyhood, select one of the methods below:</p>
 
 				<div class="btn nav-buttons">     
-					<button type="button" href="/car_age" class="btn btn-primary btn-lg">By Car Age</button>
-					<button type="button" href="/car_age" class="btn btn-primary btn-lg">By Make, Model, and Year</button>
-					<button type="button" href="/car_age" class="btn btn-primary btn-lg">By State/Region</button>
+					<a href="{{ url_for('car_age') }}" style="margin: 0px 5px;"><button type="button" class="btn btn-primary btn-lg ">By Car Age</button></a>
+					<a href="{{ url_for('multiple_fatalities') }}" style="margin: 0px 5px;"><button type="button" class="btn btn-primary btn-lg">By Make, Model, and Year</button></a>
+					<a href="{{ url_for('location') }}" style="margin: 0px 5px;"><button type="button" class="btn btn-primary btn-lg">By Location</button></a>
 				</div> 
 
         <!-- Help Modal Contents -->
