@@ -6,7 +6,7 @@ RUN pip install --upgrade pip
 
 RUN mkdir -p /opt/microservices
 ADD . /opt/microservices
-RUN pip install -r /opt/microservices/requirements.txt
+RUN pip install -r requirements.txt
 
 WORKDIR /opt/microservices
 EXPOSE 5000
