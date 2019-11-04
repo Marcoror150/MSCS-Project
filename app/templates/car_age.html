@@ -61,18 +61,23 @@
                 <div class="card-body">
                 <form action="" method="post">
                     <div id="dynamic-field-1" class="form-group dynamic-field">
-                    <label for="field" class="font-weight-bold">Year 1</label>
-                    <input type="text" id="field" class="form-control" name="field[]" />
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <b>Year</b>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            </div>
+                        </div>
                     </div>
                     <div class="clearfix mt-4">
-                    <button type="button" id="add-button" class="btn btn-secondary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i> Add</button>
-                    <button type="button" id="remove-button" class="btn btn-secondary float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i> Remove</button>
+                    <button type="button" id="add-button" class="btn btn-primary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i> Add</button>
+                    <button type="button" id="remove-button" class="btn btn-primary float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i> Remove</button>
                     <button type="submit" class="btn btn-primary float-right text-uppercase shadow-sm">Submit</button>
                     </div>
                 </form>
                 </div>
             </div>
-            <p class="text-muted font-italic">Description: <span class="font-weight-light">Add or remove fields for vehicle years. Please select a year 0000-2015 using YYYY format.</span></p>
+            <p class="text-muted font-italic">Description: <span class="font-weight-light">Add or remove fields for vehicle years. Please select a year from the drop-down list (1923-2016).</span></p>
         </div>
 
         <!-- Help Modal Contents -->
@@ -129,7 +134,7 @@
             var className = ".dynamic-field";
             var count = 0;
             var field = "";
-            var maxFields = 5;
+            var maxFields = 93;
 
             function totalFields() {
                 return $(className).length;
