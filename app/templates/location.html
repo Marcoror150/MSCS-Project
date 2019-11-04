@@ -53,7 +53,26 @@
                     <h1 class="font-weight-bold">Accident Data based on Location</h1>
                     <p>input and metrics</p>          
                 </div>
-                <p>Add content </p>
+        </div>
+
+        <!-- Year drop-downs and add/remove fields -->
+        <div class="container my-4">
+            <div class="card my-4 shadow">
+                <div class="card-body">
+                <form action="" method="post">
+                    <div id="dynamic-field-1" class="form-group dynamic-field">
+                    <label for="field" class="font-weight-bold">Year 1</label>
+                    <input type="text" id="field" class="form-control" name="field[]" />
+                    </div>
+                    <div class="clearfix mt-4">
+                    <button type="button" id="add-button" class="btn btn-secondary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i> Add</button>
+                    <button type="button" id="remove-button" class="btn btn-secondary float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i> Remove</button>
+                    <button type="submit" class="btn btn-primary float-right text-uppercase shadow-sm">Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+            <p class="text-muted font-italic">Description: <span class="font-weight-light">Add or remove fields for vehicle years. Please select a year 0000-2015 using YYYY format.</span></p>
         </div>
 
         <!-- Help Modal Contents -->
@@ -102,6 +121,76 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+            var buttonAdd = $("#add-button");
+            var buttonRemove = $("#remove-button");
+            var className = ".dynamic-field";
+            var count = 0;
+            var field = "";
+            var maxFields = 5;
+
+            function totalFields() {
+                return $(className).length;
+            }
+
+            function addNewField() {
+                count = totalFields() + 1;
+                field = $("#dynamic-field-1").clone();
+                field.attr("id", "dynamic-field-" + count);
+                field.children("label").text("Year " + count);
+                field.find("input").val("");
+                $(className + ":last").after($(field));
+            }
+
+            function removeLastField() {
+                if (totalFields() > 1) {
+                $(className + ":last").remove();
+                }
+            }
+
+            function enableButtonRemove() {
+                if (totalFields() === 2) {
+                buttonRemove.removeAttr("disabled");
+                buttonRemove.addClass("shadow-sm");
+                }
+            }
+
+            function disableButtonRemove() {
+                if (totalFields() === 1) {
+                buttonRemove.attr("disabled", "disabled");
+                buttonRemove.removeClass("shadow-sm");
+                }
+            }
+
+            function disableButtonAdd() {
+                if (totalFields() === maxFields) {
+                buttonAdd.attr("disabled", "disabled");
+                buttonAdd.removeClass("shadow-sm");
+                }
+            }
+
+            function enableButtonAdd() {
+                if (totalFields() === (maxFields - 1)) {
+                buttonAdd.removeAttr("disabled");
+                buttonAdd.addClass("shadow-sm");
+                }
+            }
+
+            buttonAdd.click(function() {
+                addNewField();
+                enableButtonRemove();
+                disableButtonAdd();
+            });
+
+            buttonRemove.click(function() {
+                removeLastField();
+                disableButtonRemove();
+                enableButtonAdd();
+            });
+            });
+        </script>
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
