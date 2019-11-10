@@ -34,8 +34,4 @@ CREATE DATABASE accidents_raw;
 GRANT ALL PRIVILEGES ON DATABASE accidents_raw TO postgres;
 
 # Connect to the DB.
-\connect accidents_raw 
-
-# Run DB creation script. May need to specify python2?
-\q
-python DBPopulate.py
+\connect accidents_raw
