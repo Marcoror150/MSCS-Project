@@ -7,4 +7,4 @@
 python  ./DB/DBPopulate.py
 
 # Start the web app.
-source flaskLocal
+./flaskLocal.sh
