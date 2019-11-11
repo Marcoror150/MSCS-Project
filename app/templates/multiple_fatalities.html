@@ -62,19 +62,19 @@
                 <form action="" method="post">
                     <div id="dynamic-field-1" class="form-group dynamic-field">
                         <div class="btn nav-buttons">
-                            <div class="dropdown" style="margin: 0px 5px;">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>Make</b>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                </div>
+                            <div class="dropdown">
+                                <label for="make"><b>Make:</b></label> 
+                                <input list="makes" name="make"> 
+                                <datalist id="makes"> 
+                                    
+                                </datalist>
                             </div>
-                            <div class="dropdown style="margin: 0px 5px;"">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>Model</b>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                </div>
+                            <div class="dropdown">
+                                <label for="model"><b>Model:</b></label> 
+                                <input list="models" name="model"> 
+                                <datalist id="models"> 
+                                    
+                                </datalist>
                             </div>
                             <div class="dropdown">
                                 <label for="year"><b>Year:</b></label> 
@@ -175,13 +175,6 @@
                                     <option value="2015">
                                     <option value="2016">
                                 </datalist>
-                            <div class="dropdown" style="margin: 0px 5px;">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>Year</b>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="clearfix mt-4" style="display:flex; justify-content:center;">

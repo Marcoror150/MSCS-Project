@@ -45,3 +45,7 @@
 .navbar-dark{
   margin-bottom: 50px;
 }
+
+input::-webkit-calendar-picker-indicator {
+  opacity: 100;
+}
