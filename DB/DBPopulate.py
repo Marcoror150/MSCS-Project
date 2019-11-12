@@ -29,7 +29,7 @@ conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
 
 # Files we will use to populate the tables, the indexes must match with respective table.
 FILES = ['../Data/2015/accident.csv', '../Data/2015/utilized-accident-data.csv', 
-				'../Data/2015/vehicle.csv', '../Data/2015/accident_vehicle_merge csv']
+				'../Data/2015/vehicle.csv', '../Data/2015/accident_vehicle_merge.csv']
 
 TABLE_NAMES = ['master_accidents', 'utilized_accidents', 'vehicles', 'accident_vehivle_master']
 
