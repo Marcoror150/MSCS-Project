@@ -74,7 +74,7 @@ for index in range(0, len(FILES)):
 
     statement = statement[:-1] + ');'
 
-    # Drop the master table if it exists, to repopulate it.
+    # Drop the table, if it exists, to repopulate it.
     cur.execute("""
     DROP TABLE IF EXISTS """ + TABLE_NAMES[index])
     conn.commit()

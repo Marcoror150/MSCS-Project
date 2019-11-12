@@ -1,17 +1,22 @@
 #!/bin/bash
 
-# Install Ruby and Homebrew.
+# Install Ruby.
 sudo apt update
 
 sudo apt install ruby-full
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# sudo apt install libpq-dev python3-dev Maybe add to requirements.
+
+# Install Linuxbrew, needs user interaction
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+
 # Install postgresql.
 brew install postgresql
 
 # Start postgresql services everytime on startup.
-pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
+pg_ctl -D /home/linuxbrew/.linuxbrew/var/postgres start
 
 # Check version for debugging purposes.
 # postgres -V
@@ -23,11 +28,11 @@ psql postgres
 CREATE ROLE postgres WITH LOGIN PASSWORD 'password';
 
 # Grant user permissions
-ALTER ROLE postgres CREATEDB;
+ALTER ROLE postgres SUPERUSER;
 
 # Leave super user environment and enter postgres user environment.
-\q
-psql postgres -U postgres
+# \q
+# psql postgres -U postgres
 
 # Create database for application and assign postgres as owner.
 CREATE DATABASE accidents_raw;
