@@ -83,8 +83,8 @@ for index in range(0, len(FILES)):
     cur.execute(statement)
     conn.commit()
 
-    # Alter each table to make the ST_CASE the Primary Key except the vehicles table.
-    if TABLE_NAMES[index] != 'vehicles' or TABLE_NAMES[index] != 'accident_vehicle_master':
+    # Alter each table to make the ST_CASE the Primary Key except the vehicles and merged table.
+    if TABLE_NAMES[index] != 'vehicles' and TABLE_NAMES[index] != 'accident_vehicle_master':
       statement = 'ALTER TABLE ' + TABLE_NAMES[index] + ' ADD PRIMARY KEY (st_case)'
       cur.execute(statement)
       conn.commit()
