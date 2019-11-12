@@ -31,7 +31,7 @@ conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
 FILES = ['../Data/2015/accident.csv', '../Data/2015/utilized-accident-data.csv', 
 				'../Data/2015/vehicle.csv', '../Data/2015/accident_vehicle_merge.csv']
 
-TABLE_NAMES = ['master_accidents', 'utilized_accidents', 'vehicles', 'accident_vehivle_master']
+TABLE_NAMES = ['master_accidents', 'utilized_accidents', 'vehicles', 'accident_vehicle_master']
 
 for index in range(0, len(FILES)):
 
@@ -84,7 +84,7 @@ for index in range(0, len(FILES)):
     conn.commit()
 
     # Alter each table to make the ST_CASE the Primary Key except the vehicles table.
-    if TABLE_NAMES[index] != 'vehicles' :
+    if TABLE_NAMES[index] != 'vehicles' or TABLE_NAMES[index] != 'accident_vehicle_master':
       statement = 'ALTER TABLE ' + TABLE_NAMES[index] + ' ADD PRIMARY KEY (st_case)'
       cur.execute(statement)
       conn.commit()
