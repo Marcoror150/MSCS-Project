@@ -84,15 +84,7 @@ for index in range(0, len(FILES)):
     conn.commit()
 
     # Alter each table to make the ST_CASE the Primary Key except the vehicles table.
-    if TABLE_NAMES[index] == 'vehicles' :
-      statement = 'ALTER TABLE ' + TABLE_NAMES[index] + ' ADD COLUMN p_key SERIAL'
-      cur.execute(statement)
-      conn.commit()
-
-      statement = 'ALTER TABLE ' + TABLE_NAMES[index] + ' ADD PRIMARY KEY (p_key)'
-      cur.execute(statement)
-      conn.commit()
-    else:
+    if TABLE_NAMES[index] != 'vehicles' :
       statement = 'ALTER TABLE ' + TABLE_NAMES[index] + ' ADD PRIMARY KEY (st_case)'
       cur.execute(statement)
       conn.commit()
