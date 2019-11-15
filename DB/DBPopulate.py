@@ -1,3 +1,9 @@
+"""
+Author: Marc Christensen
+
+This script creates and populates the table required to run the C.A.R.S. analysis system. 
+"""
+
 import psycopg2, csv, ast
 
 # Determines the data type of each column in the header 
