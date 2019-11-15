@@ -60,3 +60,5 @@ def execute_call(statemnt_type, values):
 
     # Print result from delete command
     print(cur.statusmessage)
+
+    conn.commit()
