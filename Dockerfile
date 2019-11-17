@@ -16,7 +16,7 @@ COPY ./start.sh /start.sh
 COPY ./requirements.txt /requirements.txt
 COPY ./flaskLocal /flaskLocal
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 CMD start.sh
 
