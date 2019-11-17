@@ -5,7 +5,8 @@ RUN apt-get install -y build-essential python-pip python-dev
 RUN pip install --upgrade pip
 
 # Create directories we need.
-RUN ["mkdir -p /data/postgres", "mkdir usr/local/var/postgres"]
+RUN mkdir -p /data/postgres
+RUN mkdir -p usr/local/var/postgres
 
 # Copy files from our project that are absolutely needed.
 COPY ./app /app
@@ -13,9 +14,9 @@ COPY ./DB /DB
 COPY ./Data /Data
 COPY ./start.sh /start.sh
 COPY ./requirements.txt /requirements.txt
-COPY ./flaskLocal.sh /flaskLocal.sh
+COPY ./flaskLocal /flaskLocal
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 CMD start.sh
 
