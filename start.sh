@@ -19,7 +19,7 @@ brew install postgresql
 pg_ctl -D /home/linuxbrew/.linuxbrew/var/postgres start
 
 # Run DB creation script.
-python2 ./DB/DBInitialization.sh
+psql -U postgres postgres -f ./DB/DBInitialization.sql
 
 # Run the DB populate script.
 python2 ./DB/DBPopulate.py

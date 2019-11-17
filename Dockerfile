@@ -11,6 +11,7 @@ RUN ["mkdir -p /data/postgres", "mkdir usr/local/var/postgres"]
 COPY ./app /app
 COPY ./DB /DB
 COPY ./Data /Data
+COPY ./start.sh /start.sh
 COPY ./requirements.txt /requirements.txt
 COPY ./flaskLocal.sh /flaskLocal.sh
 
