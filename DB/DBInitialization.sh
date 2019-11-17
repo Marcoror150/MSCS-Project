@@ -22,21 +22,21 @@ pg_ctl -D /home/linuxbrew/.linuxbrew/var/postgres start
 # postgres -V
 
 # Sudo may be required to enter postgresql environment.
-psql postgres
+# psql postgres
 
 # Create a user
-CREATE ROLE postgres WITH LOGIN PASSWORD 'password';
+# CREATE ROLE postgres WITH LOGIN PASSWORD 'password';
 
 # Grant user permissions
-ALTER ROLE postgres SUPERUSER;
+# ALTER ROLE postgres SUPERUSER;
 
 # Leave super user environment and enter postgres user environment.
 # \q
 # psql postgres -U postgres
 
 # Create database for application and assign postgres as owner.
-CREATE DATABASE accidents_raw;
-GRANT ALL PRIVILEGES ON DATABASE accidents_raw TO postgres;
+# CREATE DATABASE accidents_raw;
+# GRANT ALL PRIVILEGES ON DATABASE accidents_raw TO postgres;
 
 # Connect to the DB.
-\connect accidents_raw
+# \connect accidents_raw

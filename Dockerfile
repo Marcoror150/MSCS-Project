@@ -4,11 +4,18 @@ RUN apt-get update
 RUN apt-get install -y build-essential python-pip python-dev
 RUN pip install --upgrade pip
 
-RUN mkdir -p /data/postgres
-ADD . /data/postgres
+# Create directories we need.
+RUN ["mkdir -p /data/postgres", "mkdir usr/local/var/postgres"]
+
+
+COPY ./app /app
+COPY ./DB /DB
+COPY ./Data /Data
+COPY ./requirements.txt /requirements.txt
+COPY ./flaskLocal.sh /flaskLocal.sh
+
 RUN pip install -r requirements.txt
 
-WORKDIR /opt/microservices
-EXPOSE 5000
-
 CMD start.sh
+
+EXPOSE 5000
