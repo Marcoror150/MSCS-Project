@@ -49,9 +49,9 @@
         </nav>
 
         <div class="container">
-                <div class="jumbotron">
-                    <h1 class="font-weight-bold">Accident Data Based on Age of Car</h1>        
-                </div>
+            <div class="jumbotron">
+                <h1 class="font-weight-bold">Accident Data Based on Age of Car</h1>        
+            </div>
         </div>
 
         <!-- Year drop-downs and add/remove fields -->
@@ -161,7 +161,6 @@
                                 </datalist>
                             </div>
                         </div>
-                    </div>
                     <div class="clearfix mt-4" style="display:flex; justify-content:center;">
                     <button type="button" id="add-button" class="btn btn-primary float-left text-uppercase shadow-sm"><i class="fas fa-plus fa-fw"></i>Add</button>
                     <button type="button" id="remove-button" class="btn btn-primary float-left text-uppercase ml-1" disabled="disabled"><i class="fas fa-minus fa-fw"></i>Remove</button>
@@ -180,34 +179,42 @@
         
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Help</h4>
+                        <h4 class="modal-title"><b>Help Screen</b></h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
         
                     <!-- Modal body -->
                     <div class="modal-body">
-                            <p>
-                                You are currently reading the help screen for our application.
-                                Please read the following sections to help answer any questions you have.
-                            </p>
-    
-                            <p>
-                                <b>C.A.R.S.:</b>
-                                    By clicking the C.A.R.S. logo (Crash Analysis Reporting System), you will be redirected to the home page.
-                            </p>
-    
-                            <p>
-                                <b>Categories:</b>
-                                    If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
-                                    The first option is for analyzing the likelihood of an accident having multiple fatalities given a certain
-                                    car (make and model). The second option allows you to analyze the the likelihood of a general car accident
-                                    based on the age of a car. The final option allows you to calculate the likelihood of an accident when given
-                                    a specific geographic location.
-                            </p>
-    
-                            <p>
-                                For any further questions, please refer to our GitHub repository: <a href="https://github.com/Marcoror150/MSCS-Project">MSCS-Project</a>
-                            </p>
+                        <p>
+                            Please read the below content to hopefully answer any questions you have.
+                        </p>
+
+                        <p>
+                            <b>C.A.R.S.:</b>
+                                By clicking the C.A.R.S. logo (Crash Analysis Reporting System), you will be redirected to the home page.
+                        </p>
+
+                        <p>
+                            <b>Categories:</b>
+                                If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
+                                The first option allows you to analyze the the likelihood of a general car accident based on the age of a car.
+                                The second option is for analyzing the likelihood of an accident having multiple fatalities given a certain
+                                car (make and model). The final option allows you to calculate the likelihood of an accident when given
+                                a specific geographic location.
+                        </p>
+
+                        <p>
+                            <b>Select Year:</b>
+                                To calculate the accident data based on the age of a car, use the "Select Year:" drop-down and select
+                                the year you wish to analyze (1923-2016). You can either press submit from here, or if you want to analyze
+                                accident data from multiple years, you can use the green add button to add more fields and examine multiple
+                                years. If you add too many fields and do not wish to view all of those, use the red remove button to get rid
+                                of the most recent field that you added.
+                        </p>
+
+                        <p>
+                            For any further questions, please refer to our GitHub repository: <a href="https://github.com/Marcoror150/MSCS-Project">MSCS-Project</a>
+                        </p>
 
                     </div>
         
