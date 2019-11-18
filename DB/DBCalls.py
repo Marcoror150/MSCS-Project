@@ -7,15 +7,16 @@ This script is used to make calls to the C.A.R.S. database as part of the API.
 
 import psycopg2
 
-# Create connection to the DB and cursor.
-conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
-cur = conn.cursor()
-
 """ Builds and executes the statements for insert, select, and delete.
     Each item in values must be a string type. """
-def execute_call(statemnt_type, values):
-  # Requires values contain 4 strings.
-  if statemnt_type == "insert" and len(values) == 5:
+    
+def insert_call(values):
+  # Create connection to the DB and cursor.
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  cur = conn.cursor()
+
+  # Requires values contain 5 strings.
+  if len(values) == 5:
     statement = "INSERT INTO accident_vehicle_master VALUES ("
 
     # Query the DB to see the last p_key used.
@@ -33,11 +34,16 @@ def execute_call(statemnt_type, values):
     # Print result from insert command
     print(cur.statusmessage)
 
-  elif statemnt_type == "insert" and len(values) < 5:
+  else:
     print("Not enough arguments supplied to insert an entry.")
 
+def select_call(values):
+  # Create connection to the DB and cursor.
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  cur = conn.cursor()
+
   # Requires values contain 2 strings. The first is the attribute, the second is the value, otherwise, print all records.
-  if statemnt_type == "select" and len(values) == 2:
+  if len(values) == 2:
     statement = "SELECT * FROM accident_vehicle_master WHERE " + str(values[0]) + " = " + str(values[1])
     cur.execute(statement)
 
@@ -45,7 +51,7 @@ def execute_call(statemnt_type, values):
     for record in cur:
       print(record)
 
-  elif statemnt_type == "select" and len(values) < 2:
+  elif len(values) < 2:
     statement = "SELECT * FROM accident_vehicle_master"
     cur.execute(statement)
 
@@ -53,8 +59,13 @@ def execute_call(statemnt_type, values):
     for record in cur:
       print(record)
 
+def delete_call(values):
+  # Create connection to the DB and cursor.
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  cur = conn.cursor()
+
   # Requires values contain 2 strings. The first is the attribute, the second is the value.
-  if statemnt_type == "delete" and len(values) == 2:
+  if len(values) == 2:
     statement = "DELETE FROM accident_vehicle_master WHERE " + str(values[0]) + " = " + str(values[1])
     cur.execute(statement)
 
