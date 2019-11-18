@@ -9,7 +9,7 @@ import psycopg2
 
 """ Builds and executes the statements for insert, select, and delete.
     Each item in values must be a string type. """
-    
+
 def insert_call(values):
   # Create connection to the DB and cursor.
   conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
@@ -35,7 +35,7 @@ def insert_call(values):
     print(cur.statusmessage)
 
   else:
-    print("Not enough arguments supplied to insert an entry.")
+    print("Not enough arguments supplied to insert an entry. A list of strings with five values are required.")
 
 def select_call(values):
   # Create connection to the DB and cursor.
@@ -73,3 +73,6 @@ def delete_call(values):
     print(cur.statusmessage)
 
     conn.commit()
+  
+  else:
+    print("Not enough arguments supplied to delete an entry. A list of strings with two values are required.")
