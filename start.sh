@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # Install Ruby.
-sudo apt update
+apt update
 
-sudo apt install ruby-full
+apt-get install -y build-essential libpq-dev python-psycopg2 curl file git ruby-full
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install Linuxbrew.
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >>~/.bash_profile
+echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"' >>~/.bash_profile
+echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"' >>~/.bash_profile
 
-sudo apt install libpq-dev python3-dev
-
-# Install Linuxbrew, needs user interaction
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 # Install postgresql.
 brew install postgresql
@@ -19,10 +20,14 @@ brew install postgresql
 pg_ctl -D /home/linuxbrew/.linuxbrew/var/postgres start
 
 # Run DB creation script.
-psql -U postgres postgres -f ./DB/DBInitialization.sql
+psql -U postgres postgres -f /DB/DBInitialization.sql
 
 # Run the DB populate script.
-python2 ./DB/DBPopulate.py
+python2 /DB/DBPopulate.py
+
+# Change encodings for Flask to work.
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 
 # Start the web app.
-./flaskLocal.sh
+/flaskLocal
