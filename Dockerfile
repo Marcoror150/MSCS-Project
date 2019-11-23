@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 
-RUN apt-get update 
-RUN apt-get install -y python-pip python-dev python3-pip python3-dev
-RUN pip install --upgrade pip
-RUN pip3 install --upgrade pip
+RUN apt-get update; apt update 
+RUN apt install -y postgresql postgresql-contrib
+RUN apt-get install -y python-pip python-dev python3-pip python3-dev build-essential libpq-dev python-psycopg2 curl file git ruby-full vim
+RUN pip install --upgrade pip; pip3 install --upgrade pip
 
 # Create directories we need.
 RUN mkdir -p /data/postgres

@@ -12,7 +12,7 @@ import psycopg2
 
 def insert_call(values):
   # Create connection to the DB and cursor.
-  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
   cur = conn.cursor()
 
   # Requires values contain 5 strings.
@@ -39,7 +39,7 @@ def insert_call(values):
 
 def select_call(values):
   # Create connection to the DB and cursor.
-  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
   cur = conn.cursor()
 
   # Requires values contain 2 strings. The first is the attribute, the second is the value, otherwise, print all records.
@@ -61,7 +61,7 @@ def select_call(values):
 
 def delete_call(values):
   # Create connection to the DB and cursor.
-  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres")
+  conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
   cur = conn.cursor()
 
   # Requires values contain 2 strings. The first is the attribute, the second is the value.
