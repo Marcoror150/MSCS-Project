@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Install Additional requirements.
-apt update
-
-# apt-get install -y build-essential libpq-dev python-psycopg2 curl file git ruby-full
-
 # Start postgresql service.
 service postgresql start
 
