@@ -31,7 +31,7 @@ services:
   webservice:
     image: marcchristensen/mscsproject:latest
     ports:
-      - "80:80"
+      - "5000:5000"
     networks:
       - postgres
     restart: unless-stopped

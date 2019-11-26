@@ -14,9 +14,7 @@ COPY ./requirements.txt /requirements.txt
 COPY ./flaskLocal /flaskLocal
 
 RUN pip3 install -r requirements.txt
-RUN export LC_ALL=C.UTF-8
-RUN export LANG=C.UTF-8
 
-EXPOSE 80
+EXPOSE 5000
 
-CMD /flaskLocal
+RUN /start.sh 
