@@ -19,6 +19,7 @@ COPY ./flaskLocal /flaskLocal
 
 RUN pip3 install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 5050
+EXPOSE 5432
 
 RUN /start.sh
