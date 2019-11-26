@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   postgres:
-    image: marcchristensen/mscsproject:latest
+    image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-      PGDATA: /data/postgres
+      PGDATA: /var/lib/postgresql/data
     volumes:
-       - postgres:/data/postgres
+       - database_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -16,14 +16,22 @@ services:
     restart: unless-stopped
   
   pgadmin:
-    image: marcchristensen/mscsproject:latest
+    image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-marc.christensen1@marist.edu}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
-       - pgadmin:/root/.pgadmin
+       - database_data:/var/lib/postgresql/data
     ports:
       - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  webservice:
+    image: marcchristensen/mscsproject:latest
+    ports:
+      - "80:80"
     networks:
       - postgres
     restart: unless-stopped
@@ -33,5 +41,6 @@ networks:
     driver: bridge
 
 volumes:
-    postgres:
-    pgadmin:
+  database_data:
+    driver: local
+  pgadmin:

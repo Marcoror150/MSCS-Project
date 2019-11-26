@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Start postgresql service.
-service postgresql start
-
 # su - postgres
 
 # Run DB creation script.

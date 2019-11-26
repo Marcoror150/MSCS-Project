@@ -5,11 +5,7 @@ RUN apt install -y postgresql postgresql-contrib
 RUN apt-get install -y python-pip python-dev python3-pip python3-dev build-essential libpq-dev python-psycopg2 curl file git ruby-full vim
 RUN pip install --upgrade pip; pip3 install --upgrade pip
 
-# Create directories we need.
-RUN mkdir -p /data/postgres
-RUN mkdir -p /usr/local/var/postgres
-
-# Copy files from our project that are absolutely needed.
+# Copy files from our project that are required.
 COPY ./app /app
 COPY ./DB /DB
 COPY ./Data /Data
@@ -18,7 +14,9 @@ COPY ./requirements.txt /requirements.txt
 COPY ./flaskLocal /flaskLocal
 
 RUN pip3 install -r requirements.txt
+RUN export LC_ALL=C.UTF-8
+RUN export LANG=C.UTF-8
 
-EXPOSE 5000
+EXPOSE 80
 
-RUN /start.sh
+CMD /flaskLocal
