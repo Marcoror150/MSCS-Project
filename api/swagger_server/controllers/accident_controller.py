@@ -25,7 +25,8 @@ def accident_delete(body):  # noqa: E501
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
 
-    statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " + body.st_case
+    statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " \
+        + body.st_case + ";"
     cur.execute(statement)
 
     # Print result from delete command
@@ -46,7 +47,7 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
     :param state: STATE value of the object(s) to be returned
     :type state: List[int]
 
-    :rtype: Accident
+    :rtype: List[Accident]
     """
     # Create connection to the DB and cursor.
     conn = psycopg2.connect(
@@ -116,7 +117,7 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
         else:
             statement += fatals[0]
         statement += ")"
-        
+
     else:
         statement = "SELECT * FROM utilized_accidents"
     statement += ";"
