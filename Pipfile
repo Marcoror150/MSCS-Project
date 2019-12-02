@@ -14,6 +14,7 @@ requests = "*"
 pandas = "*"
 flask = "*"
 scikit-learn = "*"
+plotly = "*"
 
 [requires]
 python_version = "3.7"
