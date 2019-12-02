@@ -1,0 +1,43 @@
+
+/* Home and Help buttons */
+.btn-success {
+  color: white;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Categpries drop-down menu on all pages */
+.btn-secondary {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Index Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+/* Drop down menus and add/remove buttons on each category page */
+.btn-default {
+  border-color: black;
+  background-color:white;
+  color: black;
+  width: 197px;
+}
+
+#add-button{
+  border-color: black;
+  background-color: green;
+  color: white;
+}
+
+#remove-button{
+  border-color: black;
+  background-color: red;
+  color: white;
+}
+
+.shadow{
+  width: 600px;
+}
