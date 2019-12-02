@@ -16,7 +16,20 @@ def data_delete(st_case=None):  # noqa: E501
 
     :rtype: ApiResponse
     """
-    return 'do some magic!'
+    # Create connection to the DB and cursor.
+    conn = psycopg2.connect(
+        "host=localhost dbname=accidents_raw user=postgres password=password")
+    cur = conn.cursor()
+
+    statement = "DELETE FROM accident_vehicle_master WHERE ST_CASE = " + body.st_case
+    cur.execute(statement)
+
+    # Print result from delete command
+    print(cur.statusmessage)
+
+    conn.commit()
+    response = ApiResponse(code=200, type="Good", message="Successful delete")
+    return response
 
 
 def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):  # noqa: E501
