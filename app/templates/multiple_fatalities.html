@@ -18,7 +18,7 @@
     </head>
     <body>
         
-        <nav class="navbar navbar-toggleable-md navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-toggleable-md navbar-expand-sm bg-dark navbar-dark bg-primary">
 
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -62,18 +62,111 @@
                 <form action="" method="post">
                     <div id="dynamic-field-1" class="form-group dynamic-field">
                         <div class="btn nav-buttons">
-                            <div class="dropdown" style="margin: 0px 5px;">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>Make</b>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="margin-container">
+                                <div class="dropdown">
+                                    <label for="make"><b>Make:</b></label> 
+                                    <input list="makes" name="make"> 
+                                    <datalist id="makes"> 
+                                        <option value ="American Motors">
+                                        <option value ="Jeep/Kaiser-Jeep/Willys Jeep">
+                                        <option value ="AM General">
+                                        <option value ="Chrysler">
+                                        <option value ="Dodge">
+                                        <option value ="Imperial">
+                                        <option value ="Plymouth">
+                                        <option value ="Eagle">
+                                        <option value ="Ford">
+                                        <option value ="Lincoln">
+                                        <option value ="Mercury">
+                                        <option value ="Buick/Opel">
+                                        <option value ="Cadillac">
+                                        <option value ="Chevrolet">
+                                        <option value ="Oldsmobile">
+                                        <option value ="Pontiac">
+                                        <option value ="GMC">
+                                        <option value ="Saturn">
+                                        <option value ="Grumman">
+                                        <option value ="Other Domestic">
+                                        <option value ="Volkswagon">
+                                        <option value ="Audi">
+                                        <option value ="Austin/Austin-Healey">
+                                        <option value ="BMW">
+                                        <option value ="Datsun/Nissan">
+                                        <option value ="Fiat">
+                                        <option value ="Honda">
+                                        <option value ="Isuzu">
+                                        <option value ="Jaguar">
+                                        <option value ="Mazda">
+                                        <option value ="Mercedes-Benz">
+                                        <option value ="MG">
+                                        <option value ="Peugeot">
+                                        <option value ="Porsche">
+                                        <option value ="Saab">
+                                        <option value ="Subaru">
+                                        <option value ="Toyota">
+                                        <option value ="Triumph">
+                                        <option value ="Volvo">
+                                        <option value ="Mitsubishi">
+                                        <option value ="Suzuki">
+                                        <option value ="Acura">
+                                        <option value ="Hyundai">
+                                        <option value ="Infiniti">
+                                        <option value ="Lexus">
+                                        <option value ="Land Rover">
+                                        <option value ="Kia">
+                                        <option value ="Daewoo">
+                                        <option value ="Smart">
+                                        <option value ="Scion">
+                                        <option value ="Other Imports">
+                                        <option value ="Ducati">
+                                        <option value ="Harley-Davidson">
+                                        <option value ="Kawasaki">
+                                        <option value ="Moto Guzzi">
+                                        <option value ="Yamaha">
+                                        <option value ="Victory">
+                                        <option value ="Freightliner">
+                                        <option value ="International Harvester/Navistar">
+                                        <option value ="Kenworth">
+                                        <option value ="Mack">
+                                        <option value ="Peterbilt">
+                                        <option value ="White/Autocar, White/GMC">
+                                        <option value ="Bluebird">
+                                        <option value ="Gillig">
+                                        <option value ="MCI">
+                                        <option value ="Thomas Built"> 
+                                    </datalist>
                                 </div>
                             </div>
-                            <div class="dropdown" style="margin: 0px 5px;">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <b>Model</b>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="margin-container">
+                                <div class="dropdown">
+                                    <label for="model"><b>Model:</b></label> 
+                                    <input list="models" name="model"> 
+                                    <datalist id="models"> 
+                                        <option value ="All-Terrain Vehicles">
+                                            <option value ="Automobiles">
+                                            <option value ="Buses">
+                                            <option value ="Light Trucks">
+                                            <option value ="Med/Heavy Pickup">
+                                            <option value ="Med/Heavy Trucks - CBE">
+                                            <option value ="Med/Heavy Trucks - COE">
+                                            <option value ="Med/Heavy Trucks - COE (entry position unknown)">
+                                            <option value ="Med/Heavy Trucks - COE (high entry)">
+                                            <option value ="Med/Heavy Trucks - COE (low entry)">
+                                            <option value ="Med/Heavy Trucks - Unknown engine location">
+                                            <option value ="Med/Heavy Van-Based Vehicle">
+                                            <option value ="Motorcycles">
+                                            <option value ="Other (Bus)">
+                                            <option value ="Other (Light Trucks)">
+                                            <option value ="Other (Med/Heavy Trucks)">
+                                            <option value ="Other (Vehicle)">
+                                            <option value ="Other Make (Med/Heavy Trucks)">
+                                            <option value ="Other(Autos)">
+                                            <option value ="Unknown (Autos)">
+                                            <option value ="Unknown (Bus)">
+                                            <option value ="Unknown (LT)">
+                                            <option value ="Unknown cc (ATV)Unkown (motored cycle)">
+                                            <option value ="Unknown cc (Motorcycles)">   
+                                    </datalist>
                                 </div>
                             </div>
                             <div class="dropdown">
@@ -196,34 +289,42 @@
         
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Help</h4>
+                        <h4 class="modal-title"><b>Help Screen</b></h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
         
                     <!-- Modal body -->
                     <div class="modal-body">
-                            <p>
-                                You are currently reading the help screen for our application.
-                                Please read the following sections to help answer any questions you have.
-                            </p>
-    
-                            <p>
-                                <b>C.A.R.S.:</b>
-                                    By clicking the C.A.R.S. logo (Crash Analysis Reporting System), you will be redirected to the home page.
-                            </p>
-    
-                            <p>
-                                <b>Categories:</b>
-                                    If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
-                                    The first option is for analyzing the likelihood of an accident having multiple fatalities given a certain
-                                    car (make and model). The second option allows you to analyze the the likelihood of a general car accident
-                                    based on the age of a car. The final option allows you to calculate the likelihood of an accident when given
-                                    a specific geographic location.
-                            </p>
-    
-                            <p>
-                                For any further questions, please refer to our GitHub repository: <a href="https://github.com/Marcoror150/MSCS-Project">MSCS-Project</a>
-                            </p>
+                        <p>
+                            Please read the below content to hopefully answer any questions you have.
+                        </p>
+
+                        <p>
+                            <b>C.A.R.S.:</b>
+                                By clicking the C.A.R.S. logo (Crash Analysis Reporting System), you will be redirected to the home page.
+                        </p>
+
+                        <p>
+                            <b>Categories:</b>
+                                If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
+                                The first option allows you to analyze the the likelihood of a general car accident based on the age of a car.
+                                The second option is for analyzing the likelihood of an accident having multiple fatalities given a certain
+                                car (make and model). The final option allows you to calculate the likelihood of an accident when given
+                                a specific geographic location.
+                        </p>
+
+                        <p>
+                            <b>Select Make, Model, and Year:</b>
+                                To calculate the accident data of accidents containing multiple fatalities, enter data into all three drop-down
+                                menus and select the corresponding values that you wish to analyze. You can either press submit from here, or
+                                if you want to analyze and compare accident data from multiple inputs, you can use the green add button to add
+                                more fields and examine multiple inputs. If you add too many fields and do not wish to view all of those, use
+                                the red remove button to get rid of the most recent field that you added.
+                        </p>
+
+                        <p>
+                            For any further questions, please refer to our GitHub repository: <a href="https://github.com/Marcoror150/MSCS-Project">MSCS-Project</a>
+                        </p>
 
                     </div>
         
