@@ -36,7 +36,7 @@ def accident_delete(body):  # noqa: E501
     return response
 
 
-def accident_get(st_case=None, state=None):  # noqa: E501
+def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
     """Get accident record(s)
 
     Get an accident&#39;s information by input ST_CASE # noqa: E501
@@ -53,7 +53,7 @@ def accident_get(st_case=None, state=None):  # noqa: E501
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
 
-    if st_case != None and state != None:
+    if st_case != None and state != None and fatals != None:
         statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
@@ -62,7 +62,7 @@ def accident_get(st_case=None, state=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
+        statement += ") "
 
         statement += "AND STATE IN ("
         if len(state > 1):
@@ -72,6 +72,16 @@ def accident_get(st_case=None, state=None):  # noqa: E501
                     statement += ", "
         else:
             statement += state[0]
+        statement += ") "
+
+        statement += "AND FATALS IN ("
+        if len(fatals > 1):
+            for fatal in fatals:
+                statement += fatal
+                if fatals != fatals[-1]:
+                    statement += ", "
+        else:
+            statement += fatals[0]
         statement += ")"
 
     else if st_case != None:
@@ -84,6 +94,7 @@ def accident_get(st_case=None, state=None):  # noqa: E501
         else:
             statement += st_case[0]
         statement += ")"
+
     else if state != None:
         statement += "AND STATE IN ("
         if len(state > 1):
@@ -94,6 +105,18 @@ def accident_get(st_case=None, state=None):  # noqa: E501
         else:
             statement += state[0]
         statement += ")"
+
+    else if fatals != None:
+        statement += "AND FATALS IN ("
+        if len(fatals > 1):
+            for fatal in fatals:
+                statement += fatal
+                if fatals != fatals[-1]:
+                    statement += ", "
+        else:
+            statement += fatals[0]
+        statement += ")"
+        
     else:
         statement = "SELECT * FROM utilized_accidents"
     statement += ";"
