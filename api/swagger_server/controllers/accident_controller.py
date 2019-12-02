@@ -1,4 +1,5 @@
 import connexion
+import psycopg2
 import six
 
 from swagger_server.models.accident import Accident  # noqa: E501
@@ -18,7 +19,20 @@ def accident_delete(body):  # noqa: E501
     """
     if connexion.request.is_json:
         body = Accident.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+
+    # Create connection to the DB and cursor.
+    conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
+    cur = conn.cursor()
+
+    statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " + body.st_case
+    cur.execute(statement)
+
+    # Print result from delete command
+    print(cur.statusmessage)
+
+    conn.commit()
+    response = ApiResponse(code=200, type="Good", message="Successful delete")
+    return response
 
 
 def accident_get(st_case=None, state=None):  # noqa: E501
@@ -33,4 +47,10 @@ def accident_get(st_case=None, state=None):  # noqa: E501
 
     :rtype: Accident
     """
+    # Create connection to the DB and cursor.
+    conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
+    cur = conn.cursor()
+
+    statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " + body.st_case
+    cur.execute(statement)
     return st_case
