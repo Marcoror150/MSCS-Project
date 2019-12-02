@@ -21,7 +21,8 @@ def accident_delete(body):  # noqa: E501
         body = Accident.from_dict(connexion.request.get_json())  # noqa: E501
 
     # Create connection to the DB and cursor.
-    conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
+    conn = psycopg2.connect(
+        "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
 
     statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " + body.st_case
@@ -48,9 +49,59 @@ def accident_get(st_case=None, state=None):  # noqa: E501
     :rtype: Accident
     """
     # Create connection to the DB and cursor.
-    conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
+    conn = psycopg2.connect(
+        "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
 
-    statement = "DELETE FROM utilized_accidents WHERE ST_CASE = " + body.st_case
+    if st_case != None and state != None:
+        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        if len(st_case > 1):
+            for caseNum in st_case:
+                statement += caseNum
+                if caseNum != st_case[-1]:
+                    statement += ", "
+        else:
+            statement += st_case[0]
+        statement += ")"
+
+        statement += "AND STATE IN ("
+        if len(state > 1):
+            for stateName in state:
+                statement += stateName
+                if stateName != state[-1]:
+                    statement += ", "
+        else:
+            statement += state[0]
+        statement += ")"
+
+    else if st_case != None:
+        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        if len(st_case > 1):
+            for caseNum in st_case:
+                statement += caseNum
+                if caseNum != st_case[-1]:
+                    statement += ", "
+        else:
+            statement += st_case[0]
+        statement += ")"
+    else if state != None:
+        statement += "AND STATE IN ("
+        if len(state > 1):
+            for stateName in state:
+                statement += stateName
+                if stateName != state[-1]:
+                    statement += ", "
+        else:
+            statement += state[0]
+        statement += ")"
+    else:
+        statement = "SELECT * FROM utilized_accidents"
+    statement += ";"
     cur.execute(statement)
-    return st_case
+
+    returnAcc = []
+    for record in cur.fetchall():
+        tempAccident = Accident(state=record[0], st_case=record[1], 
+        fatals=record[-2])
+        returnAcc.append(tempAccident)
+    return returnAcc
