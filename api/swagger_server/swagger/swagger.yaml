@@ -1,0 +1,319 @@
+---
+swagger: "2.0"
+info:
+  description: "C.A.R.S. Api - Access data on fatal accidents in the United States.\n"
+  version: "1.0.2"
+  title: "C.A.R.S. API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "marc.christensen1@marist.edu"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/dannymulick1/CARS_Capping2019/1.0.2"
+tags:
+- name: "accident"
+  description: "Operations pertaining to raw data for accidents"
+- name: "vehicle"
+  description: "Operations pertaining to raw data for vehicles"
+- name: "data"
+  description: "Operations to view the transformed data that went into making our\
+    \ models"
+schemes:
+- "https"
+- "http"
+paths:
+  /accident:
+    get:
+      tags:
+      - "accident"
+      summary: "Get accident record(s)"
+      description: "Get an accident's information by input ST_CASE"
+      operationId: "accident_get"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "st_case"
+        in: "query"
+        description: "ST_CASE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "state"
+        in: "query"
+        description: "STATE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Accident"
+      x-swagger-router-controller: "swagger_server.controllers.accident_controller"
+    delete:
+      tags:
+      - "accident"
+      summary: "Delete a record of an accident"
+      operationId: "accident_delete"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/Accident"
+      responses:
+        200:
+          description: "Successful delete"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      x-swagger-router-controller: "swagger_server.controllers.accident_controller"
+  /vehicle:
+    get:
+      tags:
+      - "vehicle"
+      summary: "Get a vehicle record"
+      description: "This can only be done by the logged in user."
+      operationId: "get_vehicle"
+      parameters:
+      - name: "st_case"
+        in: "query"
+        description: "ST_CASE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "make"
+        in: "query"
+        description: "MAKE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "model"
+        in: "query"
+        description: "Model value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Vehicle"
+      x-swagger-router-controller: "swagger_server.controllers.vehicle_controller"
+    delete:
+      tags:
+      - "vehicle"
+      summary: "Delete a record of a vehicle"
+      operationId: "vehicle_delete"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/Vehicle"
+      responses:
+        200:
+          description: "Successful delete"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      x-swagger-router-controller: "swagger_server.controllers.vehicle_controller"
+  /data:
+    get:
+      tags:
+      - "data"
+      summary: "Get data from our model training set"
+      operationId: "get_data"
+      parameters:
+      - name: "st_case"
+        in: "query"
+        description: "ST_CASE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "make"
+        in: "query"
+        description: "MAKE value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "model"
+        in: "query"
+        description: "MODEL value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "mod_year"
+        in: "query"
+        description: "MOD_YEAR value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+        collectionFormat: "csv"
+      - name: "fatals"
+        in: "query"
+        description: "FATALS value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "Get some data"
+          schema:
+            $ref: "#/definitions/Data"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    post:
+      tags:
+      - "data"
+      summary: "Post data to our model training set"
+      operationId: "post_data"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/Data"
+      responses:
+        200:
+          description: "Successful post"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    delete:
+      tags:
+      - "data"
+      summary: "Delete a record from training data"
+      operationId: "data_delete"
+      parameters:
+      - name: "st_case"
+        in: "query"
+        description: "ST_CASE value of the object(s) to be deleted"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "Successful delete"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Accident:
+    type: "object"
+    properties:
+      ST_CASE:
+        type: "string"
+      MAKE:
+        type: "string"
+      MODEL:
+        type: "string"
+      MOD_YEAR:
+        type: "integer"
+        format: "int32"
+      FATALS:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Accident"
+    example:
+      FATALS: 6
+      ST_CASE: "ST_CASE"
+      MODEL: "MODEL"
+      MAKE: "MAKE"
+      MOD_YEAR: 0
+  Vehicle:
+    type: "object"
+    properties:
+      ST_CASE:
+        type: "string"
+      MAKE:
+        type: "string"
+      MODEL:
+        type: "string"
+      MOD_YEAR:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "Vehicle"
+    example:
+      ST_CASE: "ST_CASE"
+      MODEL: "MODEL"
+      MAKE: "MAKE"
+      MOD_YEAR: 0
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+    example:
+      code: 0
+      type: "type"
+      message: "message"
+  Data:
+    type: "object"
+    properties:
+      ST_CASE:
+        type: "string"
+      MAKE:
+        type: "string"
+      MODEL:
+        type: "string"
+      MOD_YEAR:
+        type: "integer"
+        format: "int32"
+      FATALS:
+        type: "integer"
+        format: "int64"
+    example:
+      FATALS: 6
+      ST_CASE: "ST_CASE"
+      MODEL: "MODEL"
+      MAKE: "MAKE"
+      MOD_YEAR: 0
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

@@ -1,14 +1,20 @@
 FROM ubuntu:16.04
 
-RUN apt-get update 
-RUN apt-get install -y build-essential python-pip python-dev
-RUN pip install --upgrade pip
+RUN apt-get update; apt update 
+RUN apt install -y postgresql postgresql-contrib
+RUN apt-get install -y python-pip python-dev python3-pip python3-dev build-essential libpq-dev python-psycopg2 curl file git ruby-full vim
+RUN pip install --upgrade pip; pip3 install --upgrade pip
 
-RUN mkdir -p /opt/microservices
-ADD . /opt/microservices
-RUN pip install -r /opt/microservices/requirements.txt
+# Copy files from our project that are required.
+COPY ./app /app
+COPY ./DB /DB
+COPY ./Data /Data
+COPY ./start.sh /start.sh
+COPY ./requirements.txt /requirements.txt
+COPY ./flaskLocal /flaskLocal
 
-WORKDIR /opt/microservices
+RUN pip3 install -r requirements.txt
+
 EXPOSE 5000
 
-CMD python server.py
+RUN /start.sh 
