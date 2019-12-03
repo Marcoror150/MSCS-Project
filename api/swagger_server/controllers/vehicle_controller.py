@@ -6,7 +6,7 @@ from swagger_server.models.vehicle import Vehicle  # noqa: E501
 from swagger_server import util
 
 
-def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
+def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E501
     """Get a vehicle record
 
     This can only be done by the logged in user. # noqa: E501
@@ -24,9 +24,14 @@ def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
     conn = psycopg2.connect(
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
+    statement = "SELECT * FROM vehicles WHERE"
+    toCheck = [st_case, make, model, mod_year]
+    for var in toCheck:
+        if var == None:
+            toCheck.remove(var)
 
-    if st_case != None and make != None and model != None:
-        statement = "SELECT * FROM vehicles WHERE ST_CASE IN ("
+    if st_case != None and make != None and model != None, mod_year != None:
+        statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -34,9 +39,8 @@ def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
 
-        statement += "AND MAKE IN ("
+        statement += ") AND MAKE IN ("
         if len(make > 1):
             for makeName in make:
                 statement += makeName
@@ -44,9 +48,8 @@ def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
                     statement += ", "
         else:
             statement += make[0]
-        statement += ")"
 
-        statement += "AND MODEL IN ("
+        statement += ") AND MODEL IN ("
         if len(model > 1):
             for modelName in model:
                 statement += modelName
@@ -54,10 +57,19 @@ def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
                     statement += ", "
         else:
             statement += model[0]
+
+        statement += ") AND MOD_YEAR IN ("
+        if len(mod_year > 1):
+            for year in mod_year:
+                statement += year
+                if year != mod_year[-1]:
+                    statement += ", "
+        else:
+            statement += mod_year[0]
         statement += ")"
 
     else if st_case != None:
-        statement = "SELECT * FROM vehicles WHERE ST_CASE IN ("
+        statement = " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -65,17 +77,57 @@ def get_vehicle(st_case=None, make=None, model=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
-    else if state != None:
-        statement += "AND STATE IN ("
-        if len(state > 1):
-            for makeName in state:
+        toCheck.remove(st_case)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
+    else if make != None:
+        statement += " MAKE IN ("
+        if len(make > 1):
+            for makeName in make:
                 statement += makeName
-                if makeName != state[-1]:
+                if makeName != make[-1]:
                     statement += ", "
         else:
-            statement += state[0]
-        statement += ")"
+            statement += make[0]
+        toCheck.remove(make)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
+    else if model != None:
+        statement += " MODEL IN ("
+        if len(model > 1):
+            for makeName in model:
+                statement += makeName
+                if makeName != model[-1]:
+                    statement += ", "
+        else:
+            statement += model[0]
+        toCheck.remove(model)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
+    else if mod_year != None:
+        statement += " MOD_YEAR IN ("
+        if len(mod_year > 1):
+            for year in mod_year:
+                statement += year
+                if year != mod_year[-1]:
+                    statement += ", "
+        else:
+            statement += mod_year[0]
+        toCheck.remove(mod_year)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
     else:
         statement = "SELECT * FROM vehicles"
     statement += ";"
