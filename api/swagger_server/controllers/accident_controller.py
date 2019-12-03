@@ -69,9 +69,8 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
 
-        statement += " AND STATE IN ("
+        statement += ") AND STATE IN ("
         if len(state > 1):
             for stateName in state:
                 statement += stateName
@@ -79,9 +78,8 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += state[0]
-        statement += ")"
 
-        statement += " AND FATALS IN ("
+        statement += ") AND FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
                 statement += fatal
