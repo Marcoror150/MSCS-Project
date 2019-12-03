@@ -136,7 +136,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     returnVeh = []
     for record in cur.fetchall():
         tempVehicle = Vehicle(st_case=record[1], make=record[15], 
-        model=record[16], mod_year=record[19])
+            model=record[16], mod_year=record[19])
         returnVeh.append(tempAccident)
     return returnVeh
 
