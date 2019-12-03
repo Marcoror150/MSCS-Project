@@ -30,7 +30,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
         if var == None:
             toCheck.remove(var)
 
-    if st_case != None and make != None and model != None, mod_year != None:
+    if st_case != None and make != None and model != None and mod_year != None:
         statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
@@ -68,7 +68,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
             statement += mod_year[0]
         statement += ")"
 
-    else if st_case != None:
+    elif st_case != None:
         statement = " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
@@ -83,7 +83,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
         else:
             statement += ")"
 
-    else if make != None:
+    elif make != None:
         statement += " MAKE IN ("
         if len(make > 1):
             for makeName in make:
@@ -98,7 +98,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
         else:
             statement += ")"
 
-    else if model != None:
+    elif model != None:
         statement += " MODEL IN ("
         if len(model > 1):
             for makeName in model:
@@ -113,7 +113,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
         else:
             statement += ")"
 
-    else if mod_year != None:
+    elif mod_year != None:
         statement += " MOD_YEAR IN ("
         if len(mod_year > 1):
             for year in mod_year:

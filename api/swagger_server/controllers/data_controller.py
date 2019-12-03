@@ -62,8 +62,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         if var == None:
             toCheck.remove(var)
 
-    if st_case != None and make != None and model != None and mod_year != None
-        and fatals != None:
+    if st_case != None and make != None and model != None and \
+        mod_year != None and fatals != None:
         statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
@@ -110,7 +110,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += fatals[0]
         statement += ")"
 
-    else if st_case != None:
+    elif st_case != None:
         statement = " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
@@ -125,7 +125,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         else:
             statement += ")"
 
-    else if make != None:
+    elif make != None:
         statement += " MAKE IN ("
         if len(make > 1):
             for makeName in make:
@@ -140,7 +140,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         else:
             statement += ")"
 
-    else if model != None:
+    elif model != None:
         statement += " MODEL IN ("
         if len(model > 1):
             for modelName in model:
@@ -155,7 +155,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         else:
             statement += ")"
 
-    else if mod_year != None:
+    elif mod_year != None:
         statement += " MOD_YEAR IN ("
         if len(mod_year > 1):
             for year in mod_year:
@@ -170,7 +170,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         else:
             statement += ")"
 
-    else if fatals != None:
+    elif fatals != None:
         statement += " FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
