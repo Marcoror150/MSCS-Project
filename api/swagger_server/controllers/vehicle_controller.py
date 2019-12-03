@@ -133,11 +133,12 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     statement += ";"
     cur.execute(statement)
 
-    returnAcc = []
+    returnVeh = []
     for record in cur.fetchall():
-        tempVehicle = Vehicle(st_case=, make=, model=, mod_year=)
-        returnAcc.append(tempAccident)
-    return returnAcc
+        tempVehicle = Vehicle(st_case=record[1], make=record[15], 
+        model=record[16], mod_year=record[19])
+        returnVeh.append(tempAccident)
+    return returnVeh
 
 
 def vehicle_delete(body):  # noqa: E501
