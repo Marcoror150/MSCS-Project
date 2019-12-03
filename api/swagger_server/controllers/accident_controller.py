@@ -53,9 +53,15 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
     conn = psycopg2.connect(
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
+    statement = "SELECT * FROM utilized_accidents WHERE"
+    toCheck = [st_case, state, fatals]
+    for var in toCheck:
+        if var == None:
+            toCheck.remove(var)
+
 
     if st_case != None and state != None and fatals != None:
-        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -63,9 +69,9 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ") "
+        statement += ")"
 
-        statement += "AND STATE IN ("
+        statement += " AND STATE IN ("
         if len(state > 1):
             for stateName in state:
                 statement += stateName
@@ -73,9 +79,9 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += state[0]
-        statement += ") "
+        statement += ")"
 
-        statement += "AND FATALS IN ("
+        statement += " AND FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
                 statement += fatal
@@ -86,7 +92,7 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
         statement += ")"
 
     else if st_case != None:
-        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -94,10 +100,14 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
+        toCheck.remove(st_case)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
     else if state != None:
-        statement += "AND STATE IN ("
+        statement += " STATE IN ("
         if len(state > 1):
             for stateName in state:
                 statement += stateName
@@ -105,10 +115,14 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += state[0]
-        statement += ")"
+        toCheck.remove(state)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
     else if fatals != None:
-        statement += "AND FATALS IN ("
+        statement += " FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
                 statement += fatal
@@ -116,7 +130,11 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
                     statement += ", "
         else:
             statement += fatals[0]
-        statement += ")"
+        toCheck.remove(fatals)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
     else:
         statement = "SELECT * FROM utilized_accidents"
