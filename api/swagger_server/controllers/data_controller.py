@@ -56,10 +56,15 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
     conn = psycopg2.connect(
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
+    statement = "SELECT * FROM accident_vehicle_master WHERE"
+    toCheck = [st_case, make, model, mod_year, fatals]
+    for var in toCheck:
+        if var == None:
+            toCheck.remove(var)
 
     if st_case != None and make != None and model != None and mod_year != None
         and fatals != None:
-        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        statement += " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -110,7 +115,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         statement += ")"
 
     else if st_case != None:
-        statement = "SELECT * FROM utilized_accidents WHERE ST_CASE IN ("
+        statement = " ST_CASE IN ("
         if len(st_case > 1):
             for caseNum in st_case:
                 statement += caseNum
@@ -118,18 +123,56 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ")"
+        toCheck.remove(st_case)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
-    else if state != None:
-        statement += "AND STATE IN ("
-        if len(state > 1):
-            for stateName in state:
-                statement += stateName
-                if stateName != state[-1]:
+    else if make != None:
+        statement += " MAKE IN ("
+        if len(make > 1):
+            for makeName in make:
+                statement += makeName
+                if makeName != make[-1]:
                     statement += ", "
         else:
-            statement += state[0]
-        statement += ")"
+            statement += make[0]
+        toCheck.remove(make)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
+    else if model != None:
+        statement += "AND MODEL IN ("
+        if len(model > 1):
+            for modelName in model:
+                statement += modelName
+                if modelName != model[-1]:
+                    statement += ", "
+        else:
+            statement += model[0]
+        toCheck.remove(model)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
+
+    else if mod_year != None:
+        statement += "AND MOD_YEAR IN ("
+        if len(mod_year > 1):
+            for year in mod_year:
+                statement += year
+                if year != mod_year[-1]:
+                    statement += ", "
+        else:
+            statement += mod_year[0]
+        toCheck.remove(mod_year)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
     else if fatals != None:
         statement += "AND FATALS IN ("
@@ -140,17 +183,20 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += fatals[0]
-        statement += ")"
+        toCheck.remove(fatals)
+        if len(toCheck) > 0:
+            statement += ") AND"
+        else:
+            statement += ")"
 
     else:
-        statement = "SELECT * FROM utilized_accidents"
+        statement = "SELECT * FROM accident_vehicle_master"
     statement += ";"
     cur.execute(statement)
 
     returnAcc = []
     for record in cur.fetchall():
-        tempAccident = Accident(state=record[0], st_case=record[1], 
-        fatals=record[-2])
+        tempData = Data(st_case=, make=, model=, mod_year=, fatals=)
         returnAcc.append(tempAccident)
     return returnAcc
 
