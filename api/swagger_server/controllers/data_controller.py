@@ -72,9 +72,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += st_case[0]
-        statement += ") "
 
-        statement += "AND MAKE IN ("
+        statement += ") AND MAKE IN ("
         if len(make > 1):
             for makeName in make:
                 statement += makeName
@@ -82,9 +81,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += make[0]
-        statement += ") "
 
-        statement += "AND MODEL IN ("
+        statement += ") AND MODEL IN ("
         if len(model > 1):
             for modelName in model:
                 statement += modelName
@@ -92,9 +90,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += model[0]
-        statement += ") "
 
-        statement += "AND MOD_YEAR IN ("
+        statement += ") AND MOD_YEAR IN ("
         if len(mod_year > 1):
             for stateName in state:
                 statement += stateName
@@ -102,9 +99,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
                     statement += ", "
         else:
             statement += state[0]
-        statement += ") "
 
-        statement += "AND FATALS IN ("
+        statement += ") AND FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
                 statement += fatal
@@ -145,7 +141,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += ")"
 
     else if model != None:
-        statement += "AND MODEL IN ("
+        statement += " MODEL IN ("
         if len(model > 1):
             for modelName in model:
                 statement += modelName
@@ -160,7 +156,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += ")"
 
     else if mod_year != None:
-        statement += "AND MOD_YEAR IN ("
+        statement += " MOD_YEAR IN ("
         if len(mod_year > 1):
             for year in mod_year:
                 statement += year
@@ -175,7 +171,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += ")"
 
     else if fatals != None:
-        statement += "AND FATALS IN ("
+        statement += " FATALS IN ("
         if len(fatals > 1):
             for fatal in fatals:
                 statement += fatal
@@ -202,6 +198,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
 
 
 def post_data(body):  # noqa: E501
+    # TODO: POST DATA
     """Post data to our model training set
 
      # noqa: E501
