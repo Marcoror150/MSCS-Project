@@ -51,8 +51,17 @@ paths:
           type: "integer"
           format: "int32"
         collectionFormat: "csv"
+      - name: "fatals"
+        in: "query"
+        description: "FATALS value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "integer"
+          format: "int32"
+        collectionFormat: "csv"
       responses:
-        200:
+        "200":
           description: "successful operation"
           schema:
             $ref: "#/definitions/Accident"
@@ -70,7 +79,7 @@ paths:
         schema:
           $ref: "#/definitions/Accident"
       responses:
-        200:
+        "200":
           description: "Successful delete"
           schema:
             $ref: "#/definitions/ApiResponse"
@@ -108,7 +117,7 @@ paths:
           type: "string"
         collectionFormat: "csv"
       responses:
-        200:
+        "200":
           description: "successful operation"
           schema:
             $ref: "#/definitions/Vehicle"
@@ -126,7 +135,7 @@ paths:
         schema:
           $ref: "#/definitions/Vehicle"
       responses:
-        200:
+        "200":
           description: "Successful delete"
           schema:
             $ref: "#/definitions/ApiResponse"
@@ -181,7 +190,7 @@ paths:
           format: "int32"
         collectionFormat: "csv"
       responses:
-        200:
+        "200":
           description: "Get some data"
           schema:
             $ref: "#/definitions/Data"
@@ -199,7 +208,7 @@ paths:
         schema:
           $ref: "#/definitions/Data"
       responses:
-        200:
+        "200":
           description: "Successful post"
           schema:
             $ref: "#/definitions/ApiResponse"
@@ -219,7 +228,7 @@ paths:
           type: "string"
         collectionFormat: "csv"
       responses:
-        200:
+        "200":
           description: "Successful delete"
           schema:
             $ref: "#/definitions/ApiResponse"
@@ -242,24 +251,17 @@ definitions:
     properties:
       ST_CASE:
         type: "string"
-      MAKE:
+      STATE:
         type: "string"
-      MODEL:
-        type: "string"
-      MOD_YEAR:
-        type: "integer"
-        format: "int32"
       FATALS:
         type: "integer"
         format: "int64"
     xml:
       name: "Accident"
     example:
-      FATALS: 6
+      FATALS: 0
       ST_CASE: "ST_CASE"
-      MODEL: "MODEL"
-      MAKE: "MAKE"
-      MOD_YEAR: 0
+      STATE: "STATE"
   Vehicle:
     type: "object"
     properties:

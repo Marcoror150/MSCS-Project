@@ -15,40 +15,30 @@ class Accident(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, st_case: str=None, make: str=None, model: str=None, mod_year: int=None, fatals: int=None):  # noqa: E501
+    def __init__(self, st_case: str=None, state: str=None, fatals: int=None):  # noqa: E501
         """Accident - a model defined in Swagger
 
         :param st_case: The st_case of this Accident.  # noqa: E501
         :type st_case: str
-        :param make: The make of this Accident.  # noqa: E501
-        :type make: str
-        :param model: The model of this Accident.  # noqa: E501
-        :type model: str
-        :param mod_year: The mod_year of this Accident.  # noqa: E501
-        :type mod_year: int
+        :param state: The state of this Accident.  # noqa: E501
+        :type state: str
         :param fatals: The fatals of this Accident.  # noqa: E501
         :type fatals: int
         """
         self.swagger_types = {
             'st_case': str,
-            'make': str,
-            'model': str,
-            'mod_year': int,
+            'state': str,
             'fatals': int
         }
 
         self.attribute_map = {
             'st_case': 'ST_CASE',
-            'make': 'MAKE',
-            'model': 'MODEL',
-            'mod_year': 'MOD_YEAR',
+            'state': 'STATE',
             'fatals': 'FATALS'
         }
 
         self._st_case = st_case
-        self._make = make
-        self._model = model
-        self._mod_year = mod_year
+        self._state = state
         self._fatals = fatals
 
     @classmethod
@@ -84,67 +74,25 @@ class Accident(Model):
         self._st_case = st_case
 
     @property
-    def make(self) -> str:
-        """Gets the make of this Accident.
+    def state(self) -> str:
+        """Gets the state of this Accident.
 
 
-        :return: The make of this Accident.
+        :return: The state of this Accident.
         :rtype: str
         """
-        return self._make
+        return self._state
 
-    @make.setter
-    def make(self, make: str):
-        """Sets the make of this Accident.
+    @state.setter
+    def state(self, state: str):
+        """Sets the state of this Accident.
 
 
-        :param make: The make of this Accident.
-        :type make: str
+        :param state: The state of this Accident.
+        :type state: str
         """
 
-        self._make = make
-
-    @property
-    def model(self) -> str:
-        """Gets the model of this Accident.
-
-
-        :return: The model of this Accident.
-        :rtype: str
-        """
-        return self._model
-
-    @model.setter
-    def model(self, model: str):
-        """Sets the model of this Accident.
-
-
-        :param model: The model of this Accident.
-        :type model: str
-        """
-
-        self._model = model
-
-    @property
-    def mod_year(self) -> int:
-        """Gets the mod_year of this Accident.
-
-
-        :return: The mod_year of this Accident.
-        :rtype: int
-        """
-        return self._mod_year
-
-    @mod_year.setter
-    def mod_year(self, mod_year: int):
-        """Sets the mod_year of this Accident.
-
-
-        :param mod_year: The mod_year of this Accident.
-        :type mod_year: int
-        """
-
-        self._mod_year = mod_year
+        self._state = state
 
     @property
     def fatals(self) -> int:
