@@ -142,6 +142,6 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
     returnAcc = []
     for record in cur.fetchall():
         tempAccident = Accident(state=record[0], st_case=record[1], 
-        fatals=record[-2])
+            fatals=record[-2])
         returnAcc.append(tempAccident)
     return returnAcc
