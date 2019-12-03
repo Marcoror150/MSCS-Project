@@ -190,11 +190,12 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
     statement += ";"
     cur.execute(statement)
 
-    returnAcc = []
+    returnData = []
     for record in cur.fetchall():
-        tempData = Data(st_case=, make=, model=, mod_year=, fatals=)
-        returnAcc.append(tempAccident)
-    return returnAcc
+        tempData = Data(st_case=record[1], make=record[2], model=record[3], 
+            mod_year=record[4], fatals=record[5])
+        returnData.append(tempAccident)
+    return returnData
 
 
 def post_data(body):  # noqa: E501
