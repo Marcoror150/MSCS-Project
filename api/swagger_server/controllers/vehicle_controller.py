@@ -1,4 +1,5 @@
 import connexion
+import psycopg2
 import six
 
 from swagger_server.models.api_response import ApiResponse  # noqa: E501
@@ -26,13 +27,18 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     cur = conn.cursor()
     statement = "SELECT * FROM vehicles WHERE"
     toCheck = [st_case, make, model, mod_year]
-    for var in toCheck:
-        if var == None:
-            toCheck.remove(var)
+    toRemove = []
+    for i in range(len(toCheck)):
+        if toCheck[i] == None:
+            toRemove.append(i)
+            # toCheck.pop(i)
+    toRemove.reverse()
+    for j in toRemove:
+        toCheck.pop(j)
 
     if st_case != None and make != None and model != None and mod_year != None:
         statement += " ST_CASE IN ("
-        if len(st_case > 1):
+        if len(st_case1) > 1:
             for caseNum in st_case:
                 statement += caseNum
                 if caseNum != st_case[-1]:
@@ -41,7 +47,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
             statement += st_case[0]
 
         statement += ") AND MAKE IN ("
-        if len(make > 1):
+        if len(make) > 1:
             for makeName in make:
                 statement += makeName
                 if makeName != make[-1]:
@@ -50,7 +56,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
             statement += make[0]
 
         statement += ") AND MODEL IN ("
-        if len(model > 1):
+        if len(model) > 1:
             for modelName in model:
                 statement += modelName
                 if modelName != model[-1]:
@@ -59,7 +65,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
             statement += model[0]
 
         statement += ") AND MOD_YEAR IN ("
-        if len(mod_year > 1):
+        if len(mod_year) > 1:
             for year in mod_year:
                 statement += year
                 if year != mod_year[-1]:
@@ -69,8 +75,8 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
         statement += ")"
 
     elif st_case != None:
-        statement = " ST_CASE IN ("
-        if len(st_case > 1):
+        statement += " ST_CASE IN ("
+        if len(st_case) > 1:
             for caseNum in st_case:
                 statement += caseNum
                 if caseNum != st_case[-1]:
@@ -85,7 +91,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
 
     elif make != None:
         statement += " MAKE IN ("
-        if len(make > 1):
+        if len(make) > 1:
             for makeName in make:
                 statement += makeName
                 if makeName != make[-1]:
@@ -100,7 +106,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
 
     elif model != None:
         statement += " MODEL IN ("
-        if len(model > 1):
+        if len(model) > 1:
             for makeName in model:
                 statement += makeName
                 if makeName != model[-1]:
@@ -115,7 +121,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
 
     elif mod_year != None:
         statement += " MOD_YEAR IN ("
-        if len(mod_year > 1):
+        if len(mod_year) > 1:
             for year in mod_year:
                 statement += year
                 if year != mod_year[-1]:
@@ -137,7 +143,7 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     for record in cur.fetchall():
         tempVehicle = Vehicle(st_case=record[1], make=record[15], 
             model=record[16], mod_year=record[19])
-        returnVeh.append(tempAccident)
+        returnVeh.append(tempVehicle)
     return returnVeh
 
 

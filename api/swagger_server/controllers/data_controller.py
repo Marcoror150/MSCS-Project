@@ -1,4 +1,5 @@
 import connexion
+import psycopg2
 import six
 
 from swagger_server.models.api_response import ApiResponse  # noqa: E501
@@ -58,14 +59,19 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
     cur = conn.cursor()
     statement = "SELECT * FROM accident_vehicle_master WHERE"
     toCheck = [st_case, make, model, mod_year, fatals]
-    for var in toCheck:
-        if var == None:
-            toCheck.remove(var)
+    toRemove = []
+    for i in range(len(toCheck)):
+        if toCheck[i] == None:
+            toRemove.append(i)
+            # toCheck.pop(i)
+    toRemove.reverse()
+    for j in toRemove:
+        toCheck.pop(j)
 
     if st_case != None and make != None and model != None and \
         mod_year != None and fatals != None:
         statement += " ST_CASE IN ("
-        if len(st_case > 1):
+        if len(st_case) > 1:
             for caseNum in st_case:
                 statement += caseNum
                 if caseNum != st_case[-1]:
@@ -74,7 +80,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += st_case[0]
 
         statement += ") AND MAKE IN ("
-        if len(make > 1):
+        if len(make) > 1:
             for makeName in make:
                 statement += makeName
                 if makeName != make[-1]:
@@ -83,7 +89,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += make[0]
 
         statement += ") AND MODEL IN ("
-        if len(model > 1):
+        if len(model) > 1:
             for modelName in model:
                 statement += modelName
                 if modelName != model[-1]:
@@ -92,7 +98,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += model[0]
 
         statement += ") AND MOD_YEAR IN ("
-        if len(mod_year > 1):
+        if len(mod_year) > 1:
             for stateName in state:
                 statement += stateName
                 if stateName != state[-1]:
@@ -101,7 +107,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
             statement += state[0]
 
         statement += ") AND FATALS IN ("
-        if len(fatals > 1):
+        if len(fatals) > 1:
             for fatal in fatals:
                 statement += fatal
                 if fatals != fatals[-1]:
@@ -111,8 +117,8 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         statement += ")"
 
     elif st_case != None:
-        statement = " ST_CASE IN ("
-        if len(st_case > 1):
+        statement += " ST_CASE IN ("
+        if len(st_case) > 1:
             for caseNum in st_case:
                 statement += caseNum
                 if caseNum != st_case[-1]:
@@ -127,7 +133,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
 
     elif make != None:
         statement += " MAKE IN ("
-        if len(make > 1):
+        if len(make) > 1:
             for makeName in make:
                 statement += makeName
                 if makeName != make[-1]:
@@ -142,7 +148,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
 
     elif model != None:
         statement += " MODEL IN ("
-        if len(model > 1):
+        if len(model) > 1:
             for modelName in model:
                 statement += modelName
                 if modelName != model[-1]:
@@ -157,7 +163,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
 
     elif mod_year != None:
         statement += " MOD_YEAR IN ("
-        if len(mod_year > 1):
+        if len(mod_year) > 1:
             for year in mod_year:
                 statement += year
                 if year != mod_year[-1]:
@@ -172,7 +178,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
 
     elif fatals != None:
         statement += " FATALS IN ("
-        if len(fatals > 1):
+        if len(fatals) > 1:
             for fatal in fatals:
                 statement += fatal
                 if fatals != fatals[-1]:
@@ -194,7 +200,7 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
     for record in cur.fetchall():
         tempData = Data(st_case=record[1], make=record[2], model=record[3], 
             mod_year=record[4], fatals=record[5])
-        returnData.append(tempAccident)
+        returnData.append(tempData)
     return returnData
 
 
