@@ -64,6 +64,9 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
     for j in toRemove:
         toCheck.pop(j)
 
+    if toCheck == []:
+        statement = "SELECT * FROM utilized_accidents"
+
     if st_case != None and state != None and fatals != None:
         statement += " ST_CASE IN ("
         if len(st_case) > 1:
@@ -77,11 +80,11 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
         statement += ") AND STATE IN ("
         if len(state) > 1:
             for stateName in state:
-                statement += stateName
+                statement += str(stateName)
                 if stateName != state[-1]:
                     statement += ", "
         else:
-            statement += state[0]
+            statement += str(state[0])
 
         statement += ") AND FATALS IN ("
         if len(fatals) > 1:
@@ -93,7 +96,7 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
             statement += fatals[0]
         statement += ")"
 
-    elif st_case != None:
+    if st_case != None:
         statement += " ST_CASE IN ("
         if len(st_case) > 1:
             for caseNum in st_case:
@@ -110,22 +113,22 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
         else:
             statement += ")"
 
-    elif state != None:
+    if state != None:
         statement += " STATE IN ("
         if len(state) > 1:
-            for stateName in state:
-                statement += stateName
-                if stateName != state[-1]:
+            for stateNum in state:
+                statement += str(stateNum)
+                if stateNum != state[-1]:
                     statement += ", "
         else:
-            statement += state[0]
+            statement += str(state[0])
         toCheck.remove(state)
         if len(toCheck) > 0:
             statement += ") AND"
         else:
             statement += ")"
 
-    elif fatals != None:
+    if fatals != None:
         statement += " FATALS IN ("
         if len(fatals) > 1:
             for fatal in fatals:
@@ -140,8 +143,6 @@ def accident_get(st_case=None, state=None, fatals=None):  # noqa: E501
         else:
             statement += ")"
 
-    else:
-        statement = "SELECT * FROM utilized_accidents"
     statement += ";"
     cur.execute(statement)
 
