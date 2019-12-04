@@ -110,7 +110,15 @@ paths:
         collectionFormat: "csv"
       - name: "model"
         in: "query"
-        description: "Model value of the object(s) to be returned"
+        description: "MODEL value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "mod_year"
+        in: "query"
+        description: "MOD_YEAR value of the object(s) to be returned"
         required: false
         type: "array"
         items:
