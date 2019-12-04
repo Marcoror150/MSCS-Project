@@ -17,4 +17,8 @@ RUN pip3 install -r requirements.txt
 
 EXPOSE 5000
 
-RUN /start.sh 
+# RUN ./start.sh
+ENV FLASK_APP /app.py
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]

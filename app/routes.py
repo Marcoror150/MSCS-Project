@@ -14,3 +14,6 @@ def car_age():
 @app.route('/location')
 def location():
     return render_template("location.html")
+@app.route('/metrics')
+def metrics():
+    return render_template("metrics.html")

@@ -41,3 +41,21 @@
 .shadow{
   width: 600px;
 }
+
+/* Allows us to see the full jumbotron without having the navbar covering the top part of it */
+.navbar-dark{
+  margin-bottom: 50px;
+}
+
+/* Makes the drop-down arrow for datalist always visible */
+input::-webkit-calendar-picker-indicator {
+  opacity: 100;
+}
+
+label{
+  margin-right: 8px;
+}
+
+.margin-container{
+  margin-right: 10px;
+}
