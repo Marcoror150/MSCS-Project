@@ -109,11 +109,11 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         statement += ") AND FATALS IN ("
         if len(fatals) > 1:
             for fatal in fatals:
-                statement += fatal
-                if fatals != fatals[-1]:
+                statement += str(fatal)
+                if fatal != fatals[-1]:
                     statement += ", "
         else:
-            statement += fatals[0]
+            statement += str(fatals[0])
         statement += ")"
 
     elif st_case != None:
@@ -180,11 +180,11 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
         statement += " FATALS IN ("
         if len(fatals) > 1:
             for fatal in fatals:
-                statement += fatal
-                if fatals != fatals[-1]:
+                statement += str(fatal)
+                if fatal != fatals[-1]:
                     statement += ", "
         else:
-            statement += fatals[0]
+            statement += str(fatals[0])
         toCheck.remove(fatals)
         if len(toCheck) > 0:
             statement += ") AND"
