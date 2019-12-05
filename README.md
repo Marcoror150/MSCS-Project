@@ -16,7 +16,7 @@ Authors:
  - The system will:
  	- Determine the likelihood of a fatal accident involving one or more fatalities based on vehicle make, model, and year.
   - Determine the likelihood of a fatal accident based on the age of vehicle.
-  - Determine accident likelihood based on geographic location within the United States, using the four major regions: West, Midwest, South, and North-East.
+  - Determine the likelihood of an accident based on the state the vehicle is located within the United States.
 
 ---
 ## Code Explanation
@@ -45,3 +45,5 @@ Authors:
 ---
 ## SwaggerHub
  - [SwaggerHub](https://app.swaggerhub.com/apis/dannymulick1/CARS_Capping2019/1.0.2)
+ 
+Version 1.2
