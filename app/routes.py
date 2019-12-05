@@ -30,7 +30,13 @@ def car_age():
     if request.method == 'GET':
         return render_template("car_age.html")
     if request.method == 'POST':
-        return "Working on it"
+        year = str(request.form['year'])
+        yearPct = agePctDict[year]
+        weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
+        responses = ["Year percentage: " + str(yearPct) \
+            + "% and Weighted Percentage: " + str(weightedPct) \
+            + " (times more likely to be involved in a fatal crash) "]
+        return {'responses':responses}
 @app.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'GET':
