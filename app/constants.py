@@ -287,8 +287,7 @@ topTenModels = {
     "Med/Heavy Trucks - COE (low entry)"           :  0.154718
 }
 
-topTenMakes = {
-    12     :14.727600,
+topTenMakes = {12     :14.727600,
     20     :14.258552,
     49     :8.214285,
     37     :7.517353,
