@@ -36,9 +36,12 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     for j in toRemove:
         toCheck.pop(j)
 
+    if toCheck == []:
+        statement = "SELECT * FROM vehicles"
+
     if st_case != None and make != None and model != None and mod_year != None:
         statement += " ST_CASE IN ("
-        if len(st_case1) > 1:
+        if len(st_case) > 1:
             for caseNum in st_case:
                 statement += caseNum
                 if caseNum != st_case[-1]:
@@ -74,68 +77,67 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
             statement += mod_year[0]
         statement += ")"
 
-    elif st_case != None:
-        statement += " ST_CASE IN ("
-        if len(st_case) > 1:
-            for caseNum in st_case:
-                statement += caseNum
-                if caseNum != st_case[-1]:
-                    statement += ", "
-        else:
-            statement += st_case[0]
-        toCheck.remove(st_case)
-        if len(toCheck) > 0:
-            statement += ") AND"
-        else:
-            statement += ")"
-
-    elif make != None:
-        statement += " MAKE IN ("
-        if len(make) > 1:
-            for makeName in make:
-                statement += makeName
-                if makeName != make[-1]:
-                    statement += ", "
-        else:
-            statement += make[0]
-        toCheck.remove(make)
-        if len(toCheck) > 0:
-            statement += ") AND"
-        else:
-            statement += ")"
-
-    elif model != None:
-        statement += " MODEL IN ("
-        if len(model) > 1:
-            for makeName in model:
-                statement += makeName
-                if makeName != model[-1]:
-                    statement += ", "
-        else:
-            statement += model[0]
-        toCheck.remove(model)
-        if len(toCheck) > 0:
-            statement += ") AND"
-        else:
-            statement += ")"
-
-    elif mod_year != None:
-        statement += " MOD_YEAR IN ("
-        if len(mod_year) > 1:
-            for year in mod_year:
-                statement += year
-                if year != mod_year[-1]:
-                    statement += ", "
-        else:
-            statement += mod_year[0]
-        toCheck.remove(mod_year)
-        if len(toCheck) > 0:
-            statement += ") AND"
-        else:
-            statement += ")"
-
     else:
-        statement = "SELECT * FROM vehicles"
+        if st_case != None:
+            statement += " ST_CASE IN ("
+            if len(st_case) > 1:
+                for caseNum in st_case:
+                    statement += caseNum
+                    if caseNum != st_case[-1]:
+                        statement += ", "
+            else:
+                statement += st_case[0]
+            toCheck.remove(st_case)
+            if len(toCheck) > 0:
+                statement += ") AND"
+            else:
+                statement += ")"
+
+        if make != None:
+            statement += " MAKE IN ("
+            if len(make) > 1:
+                for makeName in make:
+                    statement += makeName
+                    if makeName != make[-1]:
+                        statement += ", "
+            else:
+                statement += make[0]
+            toCheck.remove(make)
+            if len(toCheck) > 0:
+                statement += ") AND"
+            else:
+                statement += ")"
+
+        if model != None:
+            statement += " MODEL IN ("
+            if len(model) > 1:
+                for makeName in model:
+                    statement += makeName
+                    if makeName != model[-1]:
+                        statement += ", "
+            else:
+                statement += model[0]
+            toCheck.remove(model)
+            if len(toCheck) > 0:
+                statement += ") AND"
+            else:
+                statement += ")"
+
+        if mod_year != None:
+            statement += " MOD_YEAR IN ("
+            if len(mod_year) > 1:
+                for year in mod_year:
+                    statement += year
+                    if year != mod_year[-1]:
+                        statement += ", "
+            else:
+                statement += mod_year[0]
+            toCheck.remove(mod_year)
+            if len(toCheck) > 0:
+                statement += ") AND"
+            else:
+                statement += ")"
+
     statement += ";"
     cur.execute(statement)
 
