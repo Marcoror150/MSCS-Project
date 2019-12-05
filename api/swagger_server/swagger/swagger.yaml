@@ -1,7 +1,8 @@
 ---
 swagger: "2.0"
 info:
-  description: "C.A.R.S. Api - Access data on fatal accidents in the United States.\n"
+  description: "C.A.R.S. Api - Access data on fatal accidents in the United States.\n\
+    \"Data Source: [NHTSA](ftp://ftp.nhtsa.dot.gov/fars/)\"\n"
   version: "1.0.2"
   title: "C.A.R.S. API"
   termsOfService: "http://swagger.io/terms/"
@@ -110,7 +111,15 @@ paths:
         collectionFormat: "csv"
       - name: "model"
         in: "query"
-        description: "Model value of the object(s) to be returned"
+        description: "MODEL value of the object(s) to be returned"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "mod_year"
+        in: "query"
+        description: "MOD_YEAR value of the object(s) to be returned"
         required: false
         type: "array"
         items:
