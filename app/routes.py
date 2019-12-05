@@ -24,12 +24,14 @@ def multiple_fatalities():
         else:
             prediction = "Multiple Fatalities"
         return prediction
-@app.route('/car_age')
+@app.route('/car_age', methods=['GET', 'POST'])
 def car_age():
-    return render_template("car_age.html")
-@app.route('/location')
+    if request.method == 'GET':
+        return render_template("car_age.html")
+@app.route('/location', methods=['GET', 'POST'])
 def location():
-    return render_template("location.html")
+    if request.method == 'GET':
+        return render_template("location.html")
 @app.route('/metrics')
 def metrics():
     return render_template("metrics.html")
