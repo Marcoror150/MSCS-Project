@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -5,9 +7,229 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>NHTSA Data Science - Super Soft Tacos</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <!-- Include CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <title>Metrics of Data</title>
     </head>
     <body>
         
+        <nav class="navbar navbar-toggleable-md navbar-expand-sm bg-dark navbar-dark bg-primary">
+
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            <!-- Logo, with link to the home page -->
+            <a class="navbar-brand" href="{{ url_for('index') }}">C.A.R.S.</a>
+
+            <!-- Make these Drop-downs/buttons left-jusitfied, the help button right-justified... -->
+            <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                <!-- Drop-down menu for categories -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ url_for('car_age') }}">Car Age</a>
+                        <a class="dropdown-item" href="{{ url_for('multiple_fatalities') }}">Make, Model, and Year</a>
+                        <a class="dropdown-item" href="{{ url_for('location') }}">Location</a>
+                        <a class="dropdown-item" href="{{ url_for('metrics') }}">Metrics</a>
+                    </div>
+                </div>
+            </ul>
+
+            <!-- Button for Help Modal-->
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-question"></i>
+            </button>
+
+        </nav>
+
+        <div class="container">
+                <div class="jumbotron">
+                    <h1 class="font-weight-bold">Accident Data Metrics</h1>        
+                </div>
+        </div>
+
+        <div class="container">
+            <div class="card my-4 col-4">
+                <div class="card-body">
+                    <h2>Top Ten States</h2>
+                    <ol>
+                        {%for state in topTenStates.keys()%}
+                            <li>{{state}} {{topTenStates[state]}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            <div class="card my-4 col-4">
+                <div class="card-body">
+                    <h2>Top Ten Makes</h2>
+                    <ol>
+                        {%for make in topTenMakes.keys()%}
+                            <li>{{make}} {{topTenMakes[make]}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            <div class="card my-4 col-4">
+                <div class="card-body">
+                    <h2>Top Ten Models</h2>
+                    <ol>
+                        {%for model in topTenModels.keys()%}
+                            <li>{{model}} {{topTenModels[model]}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            <div class="card my-4 col-4">
+                <div class="card-body">
+                    <h2>Top Ten Years</h2>
+                    <ol>
+                        {%for years in topTenYears.keys()%}
+                            <li>{{year}} {{topTenYears[year]}}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+       
+
+        <!-- Help Modal Contents -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title"><b>Help Screen</b></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+        
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p>
+                            Please read the below content to hopefully answer any questions you have.
+                        </p>
+
+                        <p>
+                            <b>C.A.R.S.:</b>
+                                By clicking the C.A.R.S. logo (Crash Analysis Reporting System), you will be redirected to the home page.
+                        </p>
+
+                        <p>
+                            <b>Categories:</b>
+                                If you click on the Categories drop-down menu, you will be given the option to pick one of three categories.
+                                The first option allows you to analyze the the likelihood of a general car accident based on the age of a car.
+                                The second option is for analyzing the likelihood of an accident having multiple fatalities given a certain
+                                car (make and model). The final option allows you to calculate the likelihood of an accident when given
+                                a specific geographic location.
+                        </p>
+
+                        <p>
+                            <b>Select Make, Model, and Year:</b>
+                                To calculate the accident data of accidents containing multiple fatalities, enter data into all three drop-down
+                                menus and select the corresponding values that you wish to analyze. You can either press submit from here, or
+                                if you want to analyze and compare accident data from multiple inputs, you can use the green add button to add
+                                more fields and examine multiple inputs. If you add too many fields and do not wish to view all of those, use
+                                the red remove button to get rid of the most recent field that you added.
+                        </p>
+
+                        <p>
+                            For any further questions, please refer to our GitHub repository: <a href="https://github.com/Marcoror150/MSCS-Project">MSCS-Project</a>
+                        </p>
+
+                    </div>
+        
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(function() {
+            var buttonAdd = $("#add-button");
+            var buttonRemove = $("#remove-button");
+            var className = ".dynamic-field";
+            var count = 0;
+            var field = "";
+            var maxFields = 93;
+
+            function totalFields() {
+                return $(className).length;
+            }
+
+            function addNewField() {
+                count = totalFields() + 1;
+                field = $("#dynamic-field-1").clone();
+                field.attr("id", "dynamic-field-" + count);
+                field.children("label").text("Year " + count);
+                field.find("input").val("");
+                $(className + ":last").after($(field));
+            }
+
+            function removeLastField() {
+                if (totalFields() > 1) {
+                $(className + ":last").remove();
+                }
+            }
+
+            function enableButtonRemove() {
+                if (totalFields() === 2) {
+                buttonRemove.removeAttr("disabled");
+                buttonRemove.addClass("shadow-sm");
+                }
+            }
+
+            function disableButtonRemove() {
+                if (totalFields() === 1) {
+                buttonRemove.attr("disabled", "disabled");
+                buttonRemove.removeClass("shadow-sm");
+                }
+            }
+
+            function disableButtonAdd() {
+                if (totalFields() === maxFields) {
+                buttonAdd.attr("disabled", "disabled");
+                buttonAdd.removeClass("shadow-sm");
+                }
+            }
+
+            function enableButtonAdd() {
+                if (totalFields() === (maxFields - 1)) {
+                buttonAdd.removeAttr("disabled");
+                buttonAdd.addClass("shadow-sm");
+                }
+            }
+
+            buttonAdd.click(function() {
+                addNewField();
+                enableButtonRemove();
+                disableButtonAdd();
+            });
+
+            buttonRemove.click(function() {
+                removeLastField();
+                disableButtonRemove();
+                enableButtonAdd();
+            });
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
