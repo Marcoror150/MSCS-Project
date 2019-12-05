@@ -59,44 +59,48 @@
         </div>
 
         <div class="container">
-            <div class="card my-4 col-4">
-                <div class="card-body">
-                    <h2>Top Ten States</h2>
-                    <ol>
-                        {%for state in topTenStates.keys()%}
-                            <li>{{state}} {{topTenStates[state]}}</li>
-                        {% endfor %}
-                    </ol>
+            <div class="row">
+                <div class="card col">
+                    <div class="card-body">
+                        <h2>Top Ten States</h2>
+                        <ol>
+                            {%for state in topTenStates.keys()%}
+                                <li>{{state}} {{'{0:.4f}'.format(topTenStates[state]) + "%"}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="card col">
+                    <div class="card-body">
+                        <h2>Top Ten Makes</h2>
+                        <ol>
+                            {%for make in topTenMakes.keys()%}
+                                <li>{{make}} {{'{0:.4f}'.format(topTenMakes[make]) + "%"}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
                 </div>
             </div>
-            <div class="card my-4 col-4">
-                <div class="card-body">
-                    <h2>Top Ten Makes</h2>
-                    <ol>
-                        {%for make in topTenMakes.keys()%}
-                            <li>{{make}} {{topTenMakes[make]}}</li>
-                        {% endfor %}
-                    </ol>
+            <div class = "row">
+                <div class="card col">
+                    <div class="card-body">
+                        <h2>Top Ten Models</h2>
+                        <ol>
+                            {%for model in topTenModels.keys()%}
+                                <li>{{model}} {{'{0:.4f}'.format(topTenModels[model]) + "%"}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
                 </div>
-            </div>
-            <div class="card my-4 col-4">
-                <div class="card-body">
-                    <h2>Top Ten Models</h2>
-                    <ol>
-                        {%for model in topTenModels.keys()%}
-                            <li>{{model}} {{topTenModels[model]}}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-            </div>
-            <div class="card my-4 col-4">
-                <div class="card-body">
-                    <h2>Top Ten Years</h2>
-                    <ol>
-                        {%for years in topTenYears.keys()%}
-                            <li>{{year}} {{topTenYears[year]}}</li>
-                        {% endfor %}
-                    </ol>
+                <div class="card col">
+                    <div class="card-body">
+                        <h2>Top Ten Vehicle Years</h2>
+                        <ol>
+                            {%for year in topTenYears.keys()%}
+                                <li>{{year}} {{'{0:.4f}'.format(topTenYears[year]) + "%"}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
