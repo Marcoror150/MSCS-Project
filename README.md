@@ -46,4 +46,5 @@ Authors:
 ## SwaggerHub
  - [SwaggerHub](https://app.swaggerhub.com/apis/dannymulick1/CARS_Capping2019/1.0.2)
  
+---
 ### Version 1.2
