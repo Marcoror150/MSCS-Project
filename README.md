@@ -38,9 +38,9 @@ Authors:
 ## Local Deployment Process
   [DockerHub](https://hub.docker.com/repository/docker/marcchristensen/mscsproject)
   
-	- Docker-compose file can be used to generate all of the necessary containers for further customization.
-  	- Dockerfile creates the custom container for the webservice.
-  - DB generation scripts can be used to populate the postgresql database once initially configured.
+- Docker-compose file can be used to generate all of the necessary containers for further customization.
+- Dockerfile creates the custom container for the webservice.
+- DB generation scripts can be used to populate the postgresql database once initially configured.
   
 ---
 ## SwaggerHub
