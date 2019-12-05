@@ -33,7 +33,7 @@ def car_age():
         year = str(request.form['year'])
         yearPct = agePctDict[year]
         weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
-        responses = ["Year percentage: " + str(yearPct) \
+        responses = [year + " Year percentage: " + str(yearPct) \
             + "% and Weighted Percentage: " + str(weightedPct) \
             + " (times more likely to be involved in a fatal crash) "]
         return {'responses':responses}
@@ -46,7 +46,7 @@ def location():
         stateNum = int(stateDict[state])
         statePct = percentDict[stateNum]
         weightedPct = '{0:.2f}'.format(statePct / percentAvg)
-        responses = ["State percentage: " + str(statePct) \
+        responses = [state + " State percentage: " + str(statePct) \
             + "% and Weighted Percentage: " + str(weightedPct) \
             + " (times more likely to be involved in a fatal crash) "]
         return {'responses':responses}
