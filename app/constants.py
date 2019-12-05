@@ -288,14 +288,14 @@ topTenModels = {
     "Med/Heavy Trucks - COE (low entry)"           :  0.154718
 }
 
-topTenMakes = {12     :14.727600,
-    20     :14.258552,
-    49     :8.214285,
-    37     :7.517353,
-    7      :6.421044,
-    35     :4.922559,
-    72     :3.934599,
-    23     :3.142833,
-    2      :2.622289,
-    82     :2.437513
+topTenMakes = {"Ford"     :14.727600,
+    "Chevrolet"     :14.258552,
+    "Toyota"     :8.214285,
+    "Honda"     :7.517353,
+    "Dodge"      :6.421044,
+    "Datsun/Nissan"     :4.922559,
+    "Harley-Davidson"     :3.934599,
+    "GMC"     :3.142833,
+    "Jeep/Kaiser-Jeep/Willys Jeep"      :2.622289,
+    "Freightliner"     :2.437513
 }
