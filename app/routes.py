@@ -52,4 +52,6 @@ def location():
         return {'responses':responses}
 @app.route('/metrics')
 def metrics():
-    return render_template("metrics.html")
+    return render_template("metrics.html", topTenMakes=topTenMakes,
+        topTenModels=topTenModels, topTenStates=topTenStates, 
+        topTenYears=topTenYears)
