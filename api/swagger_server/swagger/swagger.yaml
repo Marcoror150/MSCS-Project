@@ -1,7 +1,8 @@
 ---
 swagger: "2.0"
 info:
-  description: "C.A.R.S. Api - Access data on fatal accidents in the United States.\n"
+  description: "C.A.R.S. Api - Access data on fatal accidents in the United States.\n\
+    \"Data Source: [NHTSA](ftp://ftp.nhtsa.dot.gov/fars/)\"\n"
   version: "1.0.2"
   title: "C.A.R.S. API"
   termsOfService: "http://swagger.io/terms/"
