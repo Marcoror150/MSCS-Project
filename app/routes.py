@@ -13,7 +13,7 @@ def multiple_fatalities():
         return render_template("multiple_fatalities.html")
     if request.method == 'POST':
         loaded_model = joblib.load('finalized_model.sav')
-        print(request.form)
+        # print(request.form)
         data = {
             'make' : make_numbers[request.form['make']],
             'model' : model_numbers[request.form['model']]
@@ -32,6 +32,14 @@ def car_age():
 def location():
     if request.method == 'GET':
         return render_template("location.html")
+    if request.method == 'POST':
+        state = request.form['state']
+        stateNum = int(stateDict[state])
+        statePct = percentDict[stateNum]
+        weightedPct = '{0:.2f}'.format(statePct / percentAvg)
+        return "State percentage: " + str(statePct) \
+            + "% and Weighted Percentage: " + str(weightedPct) \
+            + " (times more likely to be involved in a fatal crash) "
 @app.route('/metrics')
 def metrics():
     return render_template("metrics.html")
