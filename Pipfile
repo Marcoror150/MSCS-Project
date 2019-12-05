@@ -12,6 +12,7 @@ scikit-learn = "*"
 plotly = "*"
 requests = "*"
 psycopg2 = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.7"
