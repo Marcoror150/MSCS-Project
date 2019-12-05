@@ -23,11 +23,14 @@ def multiple_fatalities():
             prediction = "Single Fatality"
         else:
             prediction = "Multiple Fatalities"
-        return prediction
+        responses = [prediction]
+        return {'responses':responses}
 @app.route('/car_age', methods=['GET', 'POST'])
 def car_age():
     if request.method == 'GET':
         return render_template("car_age.html")
+    if request.method == 'POST':
+        return "Working on it"
 @app.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'GET':
@@ -37,9 +40,10 @@ def location():
         stateNum = int(stateDict[state])
         statePct = percentDict[stateNum]
         weightedPct = '{0:.2f}'.format(statePct / percentAvg)
-        return "State percentage: " + str(statePct) \
+        responses = ["State percentage: " + str(statePct) \
             + "% and Weighted Percentage: " + str(weightedPct) \
-            + " (times more likely to be involved in a fatal crash) "
+            + " (times more likely to be involved in a fatal crash) "]
+        return {'responses':responses}
 @app.route('/metrics')
 def metrics():
     return render_template("metrics.html")
