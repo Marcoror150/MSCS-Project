@@ -5,7 +5,11 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/
 
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN apk update && \
+ apk add postgresql-libs && \
+ apk add --virtual .build-deps gcc musl-dev postgresql-dev && \
+ python3 -m pip install -r requirements.txt --no-cache-dir && \
+ apk --purge del .build-deps
 
 COPY . /usr/src/app
 

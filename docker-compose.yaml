@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-      PGDATA: /var/lib/postgresql/data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: accidents_raw
     volumes:
        - database_data:/var/lib/postgresql/data
     ports:
@@ -32,6 +32,17 @@ services:
     image: marcchristensen/mscsproject:latest
     ports:
       - "127.0.0.1:5000:5000"
+    depends_on:
+      - postgres
+      - pgadmin
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  api:
+    build: ./api
+    ports:
+      - "127.0.0.1:8080:8080"
     restart: unless-stopped
 
 networks:
@@ -40,5 +51,4 @@ networks:
 
 volumes:
   database_data:
-    driver: local
   pgadmin:
