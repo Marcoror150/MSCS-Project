@@ -4,7 +4,7 @@ Author: Marc Christensen
 This script creates and populates the table required to run the C.A.R.S. analysis system. 
 """
 
-import psycopg2, csv, ast
+import psycopg2, csv, ast, os
 
 # Determines the data type of each column in the header 
 # and selects the appropriate type for pgAdmin.
@@ -31,7 +31,7 @@ def dataType(val, current_type):
       return 'varchar'
 
 # Create connection to the DB.
-conn = psycopg2.connect("host=localhost dbname=accidents_raw user=postgres password=password")
+conn = psycopg2.connect(os.environ["DATABASE_URL"])
 
 # Files we will use to populate the tables, the indexes must match with respective table.
 FILES = ['../Data/2015/accident.csv', '../Data/2015/utilized-accident-data.csv', 
