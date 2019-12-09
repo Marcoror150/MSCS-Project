@@ -1,6 +1,7 @@
 import connexion
 import psycopg2
 import six
+import os
 
 from swagger_server.models.api_response import ApiResponse  # noqa: E501
 from swagger_server.models.data import Data  # noqa: E501
@@ -18,8 +19,11 @@ def data_delete(st_case=None):  # noqa: E501
     :rtype: ApiResponse
     """
     # Create connection to the DB and cursor.
-    conn = psycopg2.connect(
-        "host=localhost dbname=accidents_raw user=postgres password=password")
+    if os.environ["DATABASE_URL"]:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    else:
+        conn = psycopg2.connect(
+        "host=localhost dbname=accidents_raw user=postgres password=password") 
     cur = conn.cursor()
 
     statement = "DELETE FROM accident_vehicle_master WHERE ST_CASE = " \
@@ -54,8 +58,11 @@ def get_data(st_case=None, make=None, model=None, mod_year=None, fatals=None):
     :rtype: Data
     """
     # Create connection to the DB and cursor.
-    conn = psycopg2.connect(
-        "host=localhost dbname=accidents_raw user=postgres password=password")
+    if os.environ["DATABASE_URL"]:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    else:
+        conn = psycopg2.connect(
+        "host=localhost dbname=accidents_raw user=postgres password=password") 
     cur = conn.cursor()
     statement = "SELECT * FROM accident_vehicle_master WHERE"
     toCheck = [st_case, make, model, mod_year, fatals]

@@ -1,6 +1,7 @@
 import connexion
 import psycopg2
 import six
+import os
 
 from swagger_server.models.api_response import ApiResponse  # noqa: E501
 from swagger_server.models.vehicle import Vehicle  # noqa: E501
@@ -22,7 +23,10 @@ def get_vehicle(st_case=None, make=None, model=None, mod_year=None):  # noqa: E5
     :rtype: Vehicle
     """
     # Create connection to the DB and cursor.
-    conn = psycopg2.connect(
+    if os.environ["DATABASE_URL"]:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    else:
+        conn = psycopg2.connect(
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
     statement = "SELECT * FROM vehicles WHERE"
@@ -162,7 +166,10 @@ def vehicle_delete(body):  # noqa: E501
     if connexion.request.is_json:
         body = Vehicle.from_dict(connexion.request.get_json())  # noqa: E501
      # Create connection to the DB and cursor.
-    conn = psycopg2.connect(
+    if os.environ["DATABASE_URL"]:
+        conn = psycopg2.connect(os.environ["DATABASE_URL"])
+    else:
+        conn = psycopg2.connect(
         "host=localhost dbname=accidents_raw user=postgres password=password")
     cur = conn.cursor()
 
