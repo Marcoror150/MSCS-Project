@@ -67,24 +67,24 @@ paths:
           schema:
             $ref: "#/definitions/Accident"
       x-swagger-router-controller: "swagger_server.controllers.accident_controller"
-    delete:
-      tags:
-      - "accident"
-      summary: "Delete a record of an accident"
-      operationId: "accident_delete"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/Accident"
-      responses:
-        "200":
-          description: "Successful delete"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.accident_controller"
+    # delete:
+    #   tags:
+    #   - "accident"
+    #   summary: "Delete a record of an accident"
+    #   operationId: "accident_delete"
+    #   parameters:
+    #   - in: "body"
+    #     name: "body"
+    #     description: "Created user object"
+    #     required: true
+    #     schema:
+    #       $ref: "#/definitions/Accident"
+    #   responses:
+    #     "200":
+    #       description: "Successful delete"
+    #       schema:
+    #         $ref: "#/definitions/ApiResponse"
+    #   x-swagger-router-controller: "swagger_server.controllers.accident_controller"
   /vehicle:
     get:
       tags:
@@ -131,24 +131,24 @@ paths:
           schema:
             $ref: "#/definitions/Vehicle"
       x-swagger-router-controller: "swagger_server.controllers.vehicle_controller"
-    delete:
-      tags:
-      - "vehicle"
-      summary: "Delete a record of a vehicle"
-      operationId: "vehicle_delete"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/Vehicle"
-      responses:
-        "200":
-          description: "Successful delete"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.vehicle_controller"
+    # delete:
+    #   tags:
+    #   - "vehicle"
+    #   summary: "Delete a record of a vehicle"
+    #   operationId: "vehicle_delete"
+    #   parameters:
+    #   - in: "body"
+    #     name: "body"
+    #     description: "Created user object"
+    #     required: true
+    #     schema:
+    #       $ref: "#/definitions/Vehicle"
+    #   responses:
+    #     "200":
+    #       description: "Successful delete"
+    #       schema:
+    #         $ref: "#/definitions/ApiResponse"
+    #   x-swagger-router-controller: "swagger_server.controllers.vehicle_controller"
   /data:
     get:
       tags:
@@ -204,44 +204,44 @@ paths:
           schema:
             $ref: "#/definitions/Data"
       x-swagger-router-controller: "swagger_server.controllers.data_controller"
-    post:
-      tags:
-      - "data"
-      summary: "Post data to our model training set"
-      operationId: "post_data"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/Data"
-      responses:
-        "200":
-          description: "Successful post"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
-    delete:
-      tags:
-      - "data"
-      summary: "Delete a record from training data"
-      operationId: "data_delete"
-      parameters:
-      - name: "st_case"
-        in: "query"
-        description: "ST_CASE value of the object(s) to be deleted"
-        required: false
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "csv"
-      responses:
-        "200":
-          description: "Successful delete"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    # post:
+    #   tags:
+    #   - "data"
+    #   summary: "Post data to our model training set"
+    #   operationId: "post_data"
+    #   parameters:
+    #   - in: "body"
+    #     name: "body"
+    #     description: "Created user object"
+    #     required: true
+    #     schema:
+    #       $ref: "#/definitions/Data"
+    #   responses:
+    #     "200":
+    #       description: "Successful post"
+    #       schema:
+    #         $ref: "#/definitions/ApiResponse"
+    #   x-swagger-router-controller: "swagger_server.controllers.data_controller"
+    # delete:
+    #   tags:
+    #   - "data"
+    #   summary: "Delete a record from training data"
+    #   operationId: "data_delete"
+    #   parameters:
+    #   - name: "st_case"
+    #     in: "query"
+    #     description: "ST_CASE value of the object(s) to be deleted"
+    #     required: false
+    #     type: "array"
+    #     items:
+    #       type: "string"
+    #     collectionFormat: "csv"
+    #   responses:
+    #     "200":
+    #       description: "Successful delete"
+    #       schema:
+    #         $ref: "#/definitions/ApiResponse"
+    #   x-swagger-router-controller: "swagger_server.controllers.data_controller"
 securityDefinitions:
   petstore_auth:
     type: "oauth2"
