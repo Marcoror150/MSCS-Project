@@ -14,17 +14,12 @@ def multiple_fatalities():
     if request.method == 'POST':
         loaded_model = joblib.load('finalized_model.sav')
         data = request.get_json()
-        print(data)
         response = {'responses':[]}
         for row in data['data']:
             dataIn = {
                 'make' : make_numbers[row['make']],
                 'model' : model_numbers[row['model']]
             }
-        # data = {
-        #     'make' : make_numbers[request.form['make']],
-        #     'model' : model_numbers[request.form['model']]
-        # }
             prediction = loaded_model.predict([[dataIn['make'], dataIn['model'], row['year']]])
             if prediction == False:
                 response['responses'].append({
@@ -40,21 +35,39 @@ def multiple_fatalities():
                     'year':row['year'],
                     'prediction':"Multiple Fatalities"
                 })
-        # responses = [prediction]
         return response
-        # return data['data'][0]
 @app.route('/car_age', methods=['GET', 'POST'])
 def car_age():
     if request.method == 'GET':
         return render_template("car_age.html")
     if request.method == 'POST':
-        year = str(request.form['year'])
-        yearPct = agePctDict[year]
-        weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
-        responses = [year + " Year percentage: " + str(yearPct) \
-            + "% and Weighted Percentage: " + str(weightedPct) \
-            + " (times more likely to be involved in a fatal crash) "]
-        return {'responses':responses}
+        # year = str(request.form['year'])
+        # yearPct = agePctDict[year]
+        # weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
+        # responses = [year + " Year percentage: " + str(yearPct) \
+        #     + "% and Weighted Percentage: " + str(weightedPct) \
+        #     + " (times more likely to be involved in a fatal crash) "]
+        # return {'responses':responses}
+
+        data = request.get_json()
+        response = {'responses':[]}
+        for row in data['data']:
+            year = str(row['year'])
+            if (year not in agePctDict):
+                response['responses'].append({
+                    'year':row['year'],
+                    'prediction': "Sorry, no data available for this year"
+                })
+            else:
+                yearPct = agePctDict[year]
+                weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
+                response['responses'].append({
+                    'year':row['year'],
+                    'prediction': "Year percentage: " + str(yearPct) \
+                        + "% and Weighted Percentage: " + str(weightedPct) \
+                        + " (times more likely to be involved in a fatal crash) "
+                })
+        return response
 @app.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'GET':
