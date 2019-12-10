@@ -346,35 +346,52 @@
                 makes = []
                 models = []
                 years = []
-                console.log(formData)
+                console.log(formData[0].name)
                 //  formData.array.forEach(element => {
-                var i = 0
-                console.log(formData.length)
-                for (element in formData){
-                    i++
-                    console.log(i)
+                for (element of formData){
                     console.log(element)
                     switch(element.name) {
                         case 'make':
-                            makes.append(element.value)
+                            console.log('make')
+                            makes.push(element.value)
                             break;
                         case 'model':
-                            models.append(element.value)
+                            models.push(element.value)
                             break;
                         case 'year':
-                            years.append(element.value)
+                            years.push(element.value)
                             break;
                     }
                 }
                 for (var i = 0; i < makes.length; i++) {
-                    data[i] = {
+                    data.push({
                         'make':makes[i],
                         'model':models[i],
                         'year':years[i],
-                    }
+                    })
                 }
+                console.log(makes)
+                console.log(models)
+                console.log(years)
+                console.log("data = ", data)
+
+                var postData = {'data':data}
                 
-                alert(data);
+                console.log(postData);
+                // Assign handlers immediately after making the request,
+                // and remember the jqxhr object for this request
+                $.ajax({
+                    url: 'multiple_fatalities',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // $('#target').html(data.msg);
+                        alert(data)
+                        console.log(data)
+                    },
+                    data: JSON.stringify(postData)
+                });
             }
 
             $(document).ready(function() {
@@ -446,7 +463,10 @@
             });
         </script>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
