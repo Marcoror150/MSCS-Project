@@ -59,7 +59,7 @@
         <div class="container my-4">
             <div class="card my-4 offset-2 col-8">
                 <div class="card-body" >
-                <form action="" method="post">
+                <form action="javascript:ageSubmit()">
                     <div id="dynamic-field-1" class="form-group dynamic-field">
                         <div class="dropdown" style="display:flex; justify-content:center;">
                                 <label for="year"><b>Select Year:</b></label> 
@@ -229,6 +229,37 @@
         </div>
 
         <script>
+            function ageSubmit(){
+                formData = $('form').serializeArray()
+                data = []
+                //  formData.array.forEach(element => {
+                for (element of formData){
+                    console.log(element)
+                    data.push({
+                        'year':element.value
+                    })
+                }
+                console.log("data = ", data)
+
+                var postData = {'data':data}
+                
+                console.log(postData);
+                // Assign handlers immediately after making the request,
+                // and remember the jqxhr object for this request
+                $.ajax({
+                    url: 'car_age',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // $('#target').html(data.msg);
+                        alert(data)
+                        console.log(data)
+                    },
+                    data: JSON.stringify(postData)
+                });
+            }
+
             $(document).ready(function() {
             var buttonAdd = $("#add-button");
             var buttonRemove = $("#remove-button");
@@ -298,7 +329,10 @@
             });
         </script>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
