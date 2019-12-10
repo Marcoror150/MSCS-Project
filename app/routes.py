@@ -13,18 +13,36 @@ def multiple_fatalities():
         return render_template("multiple_fatalities.html")
     if request.method == 'POST':
         loaded_model = joblib.load('finalized_model.sav')
-        # print(request.form)
-        data = {
-            'make' : make_numbers[request.form['make']],
-            'model' : model_numbers[request.form['model']]
-        }
-        prediction = loaded_model.predict([[data['make'], data['model'], request.form['year']]])
-        if prediction == False:
-            prediction = "Single Fatality"
-        else:
-            prediction = "Multiple Fatalities"
-        responses = [prediction]
-        return {'responses':responses}
+        data = request.get_json()
+        print(data)
+        response = {'responses':[]}
+        for row in data['data']:
+            dataIn = {
+                'make' : make_numbers[row['make']],
+                'model' : model_numbers[row['model']]
+            }
+        # data = {
+        #     'make' : make_numbers[request.form['make']],
+        #     'model' : model_numbers[request.form['model']]
+        # }
+            prediction = loaded_model.predict([[dataIn['make'], dataIn['model'], row['year']]])
+            if prediction == False:
+                response['responses'].append({
+                    'make':row['make'],
+                    'model':row['model'],
+                    'year':row['year'],
+                    'prediction':"Single Fatality"
+                })
+            else:
+                response['responses'].append({
+                    'make':row['make'],
+                    'model':row['model'],
+                    'year':row['year'],
+                    'prediction':"Multiple Fatalities"
+                })
+        # responses = [prediction]
+        return response
+        # return data['data'][0]
 @app.route('/car_age', methods=['GET', 'POST'])
 def car_age():
     if request.method == 'GET':
