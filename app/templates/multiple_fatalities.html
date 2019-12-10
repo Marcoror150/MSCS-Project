@@ -60,7 +60,7 @@
         <div class="container my-4">
             <div class="card my-4 offset-2 col-8">
                 <div class="card-body">
-                <form action="" method="post">
+                <form action="javascript:fatalsSubmit()">
                     <div id="dynamic-field-1" class="form-group dynamic-field">
                         <div class="btn nav-buttons">
                             <div class="margin-container">
@@ -340,6 +340,43 @@
 
 
         <script>
+            function fatalsSubmit(){
+                formData = $('form').serializeArray()
+                data = []
+                makes = []
+                models = []
+                years = []
+                console.log(formData)
+                //  formData.array.forEach(element => {
+                var i = 0
+                console.log(formData.length)
+                for (element in formData){
+                    i++
+                    console.log(i)
+                    console.log(element)
+                    switch(element.name) {
+                        case 'make':
+                            makes.append(element.value)
+                            break;
+                        case 'model':
+                            models.append(element.value)
+                            break;
+                        case 'year':
+                            years.append(element.value)
+                            break;
+                    }
+                }
+                for (var i = 0; i < makes.length; i++) {
+                    data[i] = {
+                        'make':makes[i],
+                        'model':models[i],
+                        'year':years[i],
+                    }
+                }
+                
+                alert(data);
+            }
+
             $(document).ready(function() {
             var buttonAdd = $("#add-button");
             var buttonRemove = $("#remove-button");
