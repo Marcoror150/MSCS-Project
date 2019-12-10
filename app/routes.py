@@ -41,14 +41,6 @@ def car_age():
     if request.method == 'GET':
         return render_template("car_age.html")
     if request.method == 'POST':
-        # year = str(request.form['year'])
-        # yearPct = agePctDict[year]
-        # weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
-        # responses = [year + " Year percentage: " + str(yearPct) \
-        #     + "% and Weighted Percentage: " + str(weightedPct) \
-        #     + " (times more likely to be involved in a fatal crash) "]
-        # return {'responses':responses}
-
         data = request.get_json()
         response = {'responses':[]}
         for row in data['data']:
@@ -73,14 +65,26 @@ def location():
     if request.method == 'GET':
         return render_template("location.html")
     if request.method == 'POST':
-        state = request.form['state']
-        stateNum = int(stateDict[state])
-        statePct = percentDict[stateNum]
-        weightedPct = '{0:.2f}'.format(statePct / percentAvg)
-        responses = [state + " State percentage: " + str(statePct) \
-            + "% and Weighted Percentage: " + str(weightedPct) \
-            + " (times more likely to be involved in a fatal crash) "]
-        return {'responses':responses}
+        data = request.get_json()
+        response = {'responses':[]}
+        for row in data['data']:
+            state = row['state']
+            if (state not in stateDict):
+                response['responses'].append({
+                    'state':row['state'],
+                    'prediction': "Sorry, no data available for this location"
+                })
+            else:
+                stateNum = int(stateDict[state])
+                statePct = percentDict[stateNum]
+                weightedPct = '{0:.2f}'.format(statePct / percentAvg)
+                response['responses'].append({
+                    'state':row['state'],
+                    'prediction': " State percentage: " + str(statePct) \
+                        + "% and Weighted Percentage: " + str(weightedPct) \
+                        + " (times more likely to be involved in a fatal crash) "
+                })
+        return response
 @app.route('/metrics')
 def metrics():
     return render_template("metrics.html", topTenMakes=topTenMakes,
