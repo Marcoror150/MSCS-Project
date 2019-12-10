@@ -13,8 +13,11 @@ RUN apk update && \
 
 COPY . /usr/src/app
 
+ENV DATABASE_URL postgresql://postgres:password@postgres:5432/accidents_raw
+
 EXPOSE 8080
+EXPOSE 5432
 
 ENTRYPOINT ["python3"]
 
-CMD ["-m", "swagger_server"]
+CMD ["-m", "swagger_server", "--host=0.0.0.0"]
