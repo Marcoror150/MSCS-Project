@@ -80,8 +80,10 @@ def location():
                 weightedPct = '{0:.2f}'.format(statePct / percentAvg)
                 response['responses'].append({
                     'state':row['state'],
-                    'prediction': " State percentage: " + str(statePct) \
-                        + "% and Weighted Percentage: " + str(weightedPct) \
+                    'statePct': str(statePct) + "%",
+                    'weightPct':str(weightedPct),
+                    'prediction': " State Percentage: " + str(statePct) \
+                        + "% and Weighted Value: " + str(weightedPct) \
                         + " (times more likely to be involved in a fatal crash) "
                 })
         return response
