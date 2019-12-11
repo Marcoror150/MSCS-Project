@@ -189,11 +189,15 @@
 
         <script>
             function locationSubmit(){
+                // Get all values from the form
                 formData = $('form').serializeArray()
                 data = []
-                //  formData.array.forEach(element => {
                 for (element of formData){
-                    console.log(element)
+                    // console.log(element)
+                    if (element.value == ""){
+                        alert("Please make sure to fill all fields with valid values")
+                        return false
+                    }
                     data.push({
                         'state':element.value
                     })
@@ -203,16 +207,15 @@
                 var postData = {'data':data}
                 
                 console.log(postData);
-                // Assign handlers immediately after making the request,
-                // and remember the jqxhr object for this request
+                // Ajax call to POST values
                 $.ajax({
                     url: 'location',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (data) {
-                        // alert(data)
-                        console.log(data)
+                        // console.log(data)
+                        // Build string for table of values
                         var text = "<div id = \'resultTable\' class = \"card my-4 offset-1 col-10\"><table> \
                             <tr><th>State</th> \
                                 <th>State Percentage</th> \
