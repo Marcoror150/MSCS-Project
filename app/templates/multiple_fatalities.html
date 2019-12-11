@@ -343,6 +343,7 @@
 
         <script>
             function fatalsSubmit(){
+                // Get all values from the form
                 formData = $('form').serializeArray()
                 data = []
                 makes = []
@@ -356,7 +357,6 @@
                     }
                     switch(element.name) {
                         case 'make':
-                            console.log('make')
                             makes.push(element.value)
                             break;
                         case 'model':
@@ -374,24 +374,23 @@
                         'year':years[i],
                     })
                 }
-                console.log(makes)
-                console.log(models)
-                console.log(years)
+                // console.log(makes)
+                // console.log(models)
+                // console.log(years)
                 console.log("data = ", data)
 
                 var postData = {'data':data}
                 
                 console.log(postData);
-                // Assign handlers immediately after making the request,
-                // and remember the jqxhr object for this request
+                // Ajax call to POST values
                 $.ajax({
                     url: 'multiple_fatalities',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (data) {
-                        // alert(data)
-                        console.log(data)
+                        // console.log(data)
+                        // Build string for table of values
                         var text = "<div id = \'resultTable\' class = \"card my-4 offset-1 col-10\"><table> \
                             <tr><th>Make</th> \
                                 <th>Model</th> \
