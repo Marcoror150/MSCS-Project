@@ -173,6 +173,8 @@
             <p class="text-muted font-italic">Description: <span class="font-weight-light">Add or remove fields for vehicle years. Please select a year from the drop-down list (1923-2016).</span></p>
         </div>
 
+        <div id="result" class = "container-fluid my-4"></div>
+
         <!-- Help Modal Contents -->
         <div class="modal" id="myModal">
             <div class="modal-dialog">
@@ -252,9 +254,24 @@
                     dataType: 'json',
                     contentType: 'application/json',
                     success: function (data) {
-                        // $('#target').html(data.msg);
-                        alert(data)
+                        // alert(data)
                         console.log(data)
+                        var text = "<div id = \'resultTable\' class = \"card my-4 offset-1 col-10\"><table> \
+                            <tr><th>Year</th> \
+                                <th>Year Percentage</th> \
+                                <th>Weighted Value</th> \
+                                <th>Prediction</th> \
+                                </tr>" 
+                        for (row of data['responses']){
+                            text += "<tr>"
+                            text += "<td>" + row['year'] + "</td>"
+                            text += "<td>" + row['yearPct'] + "</td>"
+                            text += "<td>" + row['weightedPct'] + "</td>"
+                            text += "<td>" + row['prediction'] + "</td>"
+                            text += "</tr>"
+                        } 
+                        text += "</table></div>"
+                        $('#result').html(text)
                     },
                     data: JSON.stringify(postData)
                 });
