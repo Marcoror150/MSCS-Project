@@ -236,7 +236,11 @@
                 data = []
                 //  formData.array.forEach(element => {
                 for (element of formData){
-                    console.log(element)
+                    // console.log(element)
+                    if (element.value == ""){
+                        alert("Please make sure to fill all fields with valid values")
+                        return false
+                    }
                     data.push({
                         'year':element.value
                     })
