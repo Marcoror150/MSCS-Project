@@ -59,3 +59,13 @@ label{
 .margin-container{
   margin-right: 10px;
 }
+
+#resultTable th{
+  background-color: #e9ecef;
+  text-align: center;
+}
+#resultTable td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}

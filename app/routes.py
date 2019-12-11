@@ -55,9 +55,11 @@ def car_age():
                 weightedPct = '{0:.4f}'.format(yearPct / ageAvg)
                 response['responses'].append({
                     'year':row['year'],
+                    'yearPct':str(yearPct) + "%",
+                    'weightedPct':weightedPct,
                     'prediction': "Year percentage: " + str(yearPct) \
                         + "% and Weighted Percentage: " + str(weightedPct) \
-                        + " (times more likely to be involved in a fatal crash) "
+                        + " (times as likely to be involved in a fatal crash compared to average) "
                 })
         return response
 @app.route('/location', methods=['GET', 'POST'])
@@ -80,9 +82,11 @@ def location():
                 weightedPct = '{0:.2f}'.format(statePct / percentAvg)
                 response['responses'].append({
                     'state':row['state'],
-                    'prediction': " State percentage: " + str(statePct) \
-                        + "% and Weighted Percentage: " + str(weightedPct) \
-                        + " (times more likely to be involved in a fatal crash) "
+                    'statePct': str(statePct) + "%",
+                    'weightPct':str(weightedPct),
+                    'prediction': " State Percentage: " + str(statePct) \
+                        + "% and Weighted Value: " + str(weightedPct) \
+                        + " (times as likely to be involved in a fatal crash compared to average) "
                 })
         return response
 @app.route('/metrics')
