@@ -1,4 +1,4 @@
-# Crash Analysis Report System - Team Super Soft Tacos
+# Crash Analysis Report System
 Data science group project for MSCS 710L
 Authors:
  - Marc Christensen
